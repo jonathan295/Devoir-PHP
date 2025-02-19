@@ -1,0 +1,1 @@
+<div class=""><br/><center>&reg; 2010 Ecole supérieure de technologie de Berrechid. Gestion de scolarité</center></div>
