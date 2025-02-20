@@ -1,6 +1,8 @@
 <?php
 //session_start();
 /*****Verification du mot de passe ****/
+include_once "controlleur/config.php";
+include_once "controlleur/function.php";
 if(isset($_POST['mdp'])){
 	if($_POST['mdp']!="" and $_POST['pseudo']!=""){
 		$mdp=$_POST['mdp'];

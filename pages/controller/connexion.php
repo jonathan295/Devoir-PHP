@@ -7,7 +7,7 @@
 
     <div class="">
         <p>Connexion</p>
-        <form action="cadre.php" method="post">
+        <form action="../header.php" method="post">
             <div>
                 <label for="">Pseudo :</label>
                 <input type="text" name="pseudo" size="15">

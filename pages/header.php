@@ -1,20 +1,26 @@
 <?php
 //session_start();
 /*****Verification du mot de passe ****/
+
+include_once "controller/function.php";
+include_once "controller/config.php";
+
 if(isset($_POST['mdp'])){
 	if($_POST['mdp']!="" and $_POST['pseudo']!=""){
-		$mdp=$_POST['mdp'];
-		$pseudo=$_POST['pseudo'];
-		$nb=req_mysql($conn,"SELECT count(*) AS nb,type,Num FROM login WHERE pseudo=? AND passe=?", [$mdp, $pseudo], PDO::FETCH_ASSOC);
-		if($nb['nb']==1){
-			if($nb['type']=="etudiant")
-				$_SESSION['etudiant']=$nb['Num'];
-			else if($nb['type']=="prof")
-				$_SESSION['prof']=$nb['Num'];
-			else if($nb['type']=="admin")
-				$_SESSION['admin']=$nb['Num'];
-		}
-		else{
+		$mdp= htmlspecialchars($_POST['mdp']);
+		$pseudo= htmlspecialchars($_POST['pseudo']);
+		$nb=req_mysql($conn,"SELECT count(*) AS nb,type,Num FROM login WHERE pseudo=? AND passe=?", [$pseudo, $mdp], PDO::FETCH_ASSOC);
+
+		if(is_array($nb) && isset($nb[0]["nb"])){
+			if ($nb[0]['nb']==1){
+				if($nb[0]['type']=="etudiant")
+					$_SESSION[0]['etudiant']=$nb[0]['Num'];
+				else if($nb[0]['type']=="prof")
+					$_SESSION[0]['prof']=$nb[0]['Num'];
+				else if($nb[0]['type']=="admin")
+					$_SESSION[0]['admin']=$nb[0]['Num'];
+				}
+			} else{
 ?>	
         <SCRIPT LANGUAGE="Javascript">alert("Login ou mot de passe incorrect");</SCRIPT> 	
 <?php
@@ -89,20 +95,44 @@ if(isset($_POST['mdp'])){
 	$datas=req_mysql($conn,"SELECT DISTINCT nom FROM classe", [], PDO::FETCH_ASSOC);
 ?>
     
+
+	<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre titre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7rxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        /* Styles CSS personnalisés (facultatif) */
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
+    </style>
+</head>
     
     
     
-    <div id="">
-		<ul class="">
+    <div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			Menu
+		</button>
+		<ul class="dropdown-menu">
 			<li>
-                <a href="" class="">Etudiants</a>
+                <a href="" class="dropdown-item">Etudiants</a>
 				<ul class="" style="">
 					<li><a href="">Consulter la liste</a>
 						<ul class="">
 						<?php 
                             $results=req_mysql($conn,"SELECT DISTINCT nom FROM classe",[], PDO::FETCH_ASSOC);
 							foreach ($results as $result){
-							    echo '<li><a href="listeEtudiant.php?nomcl='.$result['nom'].'">'.$result['nom'].'</a></li>';				
+							    echo '<li><a class="dropdown-item" href="listeEtudiant.php?nomcl='.$result['nom'].'">'.$result['nom'].'</a></li>';				
 							}
 						?>
 						</ul>

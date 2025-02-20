@@ -1,6 +1,6 @@
 <?php 
 
-    require_once "config.php";
+    include "config.php";
     global $conn;
     function req_mysql(PDO $conn, $req, $array, $fetchType) {
         $stmt = $conn->prepare($req);
