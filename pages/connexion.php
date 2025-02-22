@@ -1,13 +1,13 @@
 <?php
 
-    include_once "function.php";
-    include "../header.php";
+    include_once "controller/function.php";
+    include "header.php";
 
 ?>
 
     <div class="">
         <p>Connexion</p>
-        <form action="../header.php" method="post">
+        <form action="cadre.php" method="post">
             <div>
                 <label for="">Pseudo :</label>
                 <input type="text" name="pseudo" size="15">
@@ -22,6 +22,6 @@
 
 <?php
 
-    include_once "../footer.php";
+    include_once "footer.php";
 
 ?>
