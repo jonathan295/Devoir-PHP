@@ -1,19 +1,24 @@
 <?php
 include('cadre.php');
 ?>
-<div class="corp">
-<img src="titre_img/ajout_matiere.png" class="position_titre">
-<div class="formulaire">
-<pre>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+  	<img src="titre_img/ajout_matiere.png" class="position_titre">
+  </div>
 <?php
 if(isset($_POST['promotion'])){
 $_SESSION['promo']=$_POST['promotion'];//pour l'envoyer la 2eme fois 
 $_SESSION['nomcl']=$_POST['nomcl'];
 ?>
-<form action="ajout_matiere.php" method="POST" >
-Veuillez saisir la nouvelle matière : <br/><br/>
-Matière       :      <input type="text" name="nommat"><br/><br/>
-<center><input type="image" src="button.png"></center>
+<form action="ajout_matiere.php" method="POST" class="form">
+	<h3 class="text-center">Veuillez saisir la nouvelle matière</h3>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<label class="form-label col-8" for="">Matière</label>
+		<input class="col-8" type="text" name="nommat">
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<input class="col-2 btn btn-dark" type="submit" value="Ajouter">
+	</div>
 </form>
 <?php }
 else if(isset($_POST['nommat'])){//s'il a cliquer sur ajouter la 2eme fois
@@ -37,25 +42,33 @@ else if(isset($_POST['nommat'])){//s'il a cliquer sur ajouter la 2eme fois
 	else {
 	?> <SCRIPT LANGUAGE="Javascript">	alert("Veuilliez remplire tous les champs!"); </SCRIPT> <?php
 	}
-	echo '<a href="Ajout_matiere.php">Revenir à la page précédente !</a>';
+	echo '<a class="btn btn-dark" href="Ajout_matiere.php">Revenir à la page précédente !</a>';
 }
  else{
 $data=mysqli_query($conn, "select distinct promotion from classe order by promotion desc");//select pour les promotions
 $nomclasse=mysqli_query($conn, "select distinct nom from classe");
  ?>
- <form action="ajout_matiere.php" method="POST">
- Promotion        :             <select name="promotion"> 
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/><br/>
-Classe                 :         <select name="nomcl"> 
-<?php while($a=mysqli_fetch_array($nomclasse)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/><br/>
-<center><input type="submit" value="Suivant"></center>
+ <form action="ajout_matiere.php" method="POST" class="form">
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<label for="">Promotion</label>
+		<select class="col-2" name="promotion"> 
+		<?php while($a=mysqli_fetch_array($data)){
+		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+		}?>
+		</select>
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<label for="">Classe</label>
+		<select class="col-2" name="nomcl"> 
+		<?php while($a=mysqli_fetch_array($nomclasse)){
+		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+		}?></select>
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<input class="col-2 btn btn-dark" type="submit" value="Suivant">
+	</div>
+
 </form>
 <?php } ?>
-</pre>
-</div>
 </div>
 </html>

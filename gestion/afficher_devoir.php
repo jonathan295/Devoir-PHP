@@ -2,9 +2,10 @@
 include('cadre.php');
 $data=mysqli_query($conn, "select distinct promotion from classe order by promotion desc");
 ?>
-<div class="corp">
-<img src="titre_img/affich_devoir.png" class="position_titre">
-<center><pre>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+   <img src="titre_img/affich_devoir.png" class="position_titre">
+  </div>
 <?php
 if(isset($_POST['nomcl']) and isset($_POST['radiosem'])){
 $_SESSION['semestre']=$_POST['radiosem'];
@@ -15,16 +16,19 @@ $_SESSION['promo']=$_POST['promotion'];
 $donnee=mysqli_query($conn, "select nommat from matiere,enseignement,classe where matiere.codemat=enseignement.codemat and enseignement.codecl=classe.codecl and classe.nom='$nomcl' and promotion='$promo' and enseignement.numsem='$semestre'");//select nommat from matiere,classe where matiere.codecl=classe.codecl and classe.nom='$classe'
 $_SESSION['classe']=$nomcl;
 ?>
-<form method="post" action="afficher_devoir.php" class="formulaire">
-Les mati�res �tudi�es par la classe choisis
-<p>Mati�re : 
-<?php
-while($a=mysqli_fetch_array($donnee)){
-echo '<input type="radio" name="radio" value="'.$a['nommat'].'" id="choix1" /><label for="choix1">'.$a['nommat'].'</label><br /><br />';
-}
-?>
-<input type="submit" value="Afficher les devoirs">
-   </p>
+<form method="post" action="afficher_devoir.php" class="form">
+   <h3 class="text-center">Les matières étudiées par la classe choisis</h3>
+   <div class="row m-4 text-center justify-content-center">
+      <h3 class="text-center">Matière</h3>
+      <?php
+      while($a=mysqli_fetch_array($donnee)){
+      echo '<input class="col-1" type="radio" name="radio" value="'.$a['nommat'].'" id="choix1" /><label class="col-2" for="choix1">'.$a['nommat'].'</label><br /><br />';
+      }
+      ?>
+   </div>
+   <div class="row m-4 text-center justify-content-center flex-column align-items-center">
+      <input class="btn btn-dark col-2" type="submit" value="Afficher les devoirs">
+   </div>
 </form>
 <?php
 }
@@ -34,8 +38,9 @@ $nommat=$_POST['radio'];
 $nomcl=$_SESSION['classe'];
 $promo=$_SESSION['promo'];
 $donnee=mysqli_query($conn, "select numdev,date_dev,nommat,nom,coeficient,numsem,n_devoir from devoir,matiere,classe where matiere.codemat=devoir.codemat and classe.codecl=devoir.codecl and classe.nom='$nomcl' and devoir.numsem='$semestre' and matiere.nommat='$nommat' and promotion='$promo'");
-?><center><table id="rounded-corner">
-<thead><tr><?php echo Edition(); ?><th class="<?php echo rond(); ?>">Mati�re</th><th class="rounded-q2">Date_devoir</th><th class="rounded-q2">Classe</th><th class="rounded-q2">Coefficient</th><th class="rounded-q2">Semestre</th><th class="rounded-q4">1er/2eme devoir</th></tr></thead>
+?>
+<table class="table table-hover table-striped table-bordered" id="rounded-corner">
+<thead><tr><?php echo Edition(); ?><th class="<?php echo rond(); ?>">Matière</th><th class="rounded-q2">Date_devoir</th><th class="rounded-q2">Classe</th><th class="rounded-q2">Coefficient</th><th class="rounded-q2">Semestre</th><th class="rounded-q4">1er/2eme devoir</th></tr></thead>
 <tfoot>
 <tr>
 <td colspan="<?php echo colspan(5,7); ?>" class="rounded-foot-left"><em>&nbsp;</em></td>
@@ -51,28 +56,38 @@ echo '<td><a href="modif_devoir.php?modif_dev='.$a['numdev'].'">modifier</a></td
 ?>
 </tbody>
 </table>
-<br/><br/><a href="afficher_devoir.php">Revenir � la page principale !</a></center>
+<a class="btn btn-dark" href="afficher_devoir.php">Revenir à la page principale !</a>
 <?php
 }//fin   if(isset($_POST['radio']
 else {
 $retour=mysqli_query($conn, "select distinct nom from classe"); // afficher les classes
 ?>
-<form method="post" action="afficher_devoir.php" class="formulaire">
-Veuillez choisir le Semestre, la promotion et la classe :<br/><br/><br/>
-Promotion        :       <select name="promotion"> 
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/>
-Classe                 :      <select name="nomcl"> 
-<?php while($a=mysqli_fetch_array($retour)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/>
-Semestre           :        <select name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
-</select><br/><br/>
-<input type="submit" value="Afficher les matieres">
+<form method="post" action="afficher_devoir.php" class="form">
+   <h3 class="text-center">Veuillez choisir le Semestre, la promotion et la classe </h3>
+   <div class="row m-4 text-center justify-content-center flex-column align-items-center">
+      <label for="">Promotion</label>
+      <select class="col-2" name="promotion"> 
+      <?php while($a=mysqli_fetch_array($data)){
+      echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+      }?></select>
+   </div>
+   <div class="row m-4 text-center justify-content-center flex-column align-items-center">
+      <label for="">Classe</label>
+      <select class="col-2" name="nomcl"> 
+      <?php while($a=mysqli_fetch_array($retour)){
+      echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+      }?></select>
+   </div>
+   <div class="row m-4 text-center justify-content-center flex-column align-items-center">
+      <label for="">Semestre</label>
+      <select class="col-2" name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
+      </select>
+   </div>
+   <div class="row m-4 text-center justify-content-center flex-column align-items-center">
+      <input class="btn btn-dark col-2" type="submit" value="Afficher les matieres">
+   </div>
 </form>
 <?php } ?>
-</center></pre>
 </div>
 </body>
 </html>

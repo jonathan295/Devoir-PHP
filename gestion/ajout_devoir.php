@@ -2,10 +2,11 @@
 include('cadre.php');
 include('calendrier.html');
 ?>
-<html>
-<div class="corp">
-<center><pre><img src="titre_img/ajout_devoir.png" class="position_titre">
-<form action="ajout_devoir.php" method="POST" class="formulaire">
+<div class="container d-flex align-items- justify-content-center flex-column">
+   <div class="container d-flex align-items- justify-content-center">
+   	<img src="titre_img/ajout_devoir.png" class="position_titre">
+   </div>
+<form action="ajout_devoir.php" method="POST" class="form">
 <?php
 if(isset($_POST['nomcl'])){
 $_SESSION['nomcl']=$_POST['nomcl'];
@@ -14,24 +15,42 @@ $promo=$_POST['promotion'];
 $_SESSION['promo']=$promo;
 $donnee=mysqli_query($conn, "select codemat,nommat from matiere,classe where matiere.codecl=classe.codecl and nom='$nomcl' and promotion='$promo'");
 ?>
-<FIELDSET>
-<LEGEND align=top>Ajouter un devoir<LEGEND><pre>
-Mati�re                   :          <select name="choix_mat" id="choix">
-<?php
-while($a=mysqli_fetch_array($donnee)){
-   echo '<option value="'.$a['codemat'].'">'.$a['nommat'].'</option>';
-}
-?>
-</select><br/><br/>
-Date du devoir        :              <input type="text" name="date" class="calendrier"><br/></br/>
-Coefficient              :       <select name="coefficient"><?php for($i=1;$i<=15;$i++){ echo '<option value="'.$i.'">'.$i.'</option>'; } ?>
-</select><br/><br/>
-Semestre                  :      <select name="semestre"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
-</select><br/>
-1er / 2�me Devoir    :       <input type="radio" name="devoir" value="1" id="choix1" /> <label for="choix1">1er devoir</label>
-                                          <input type="radio" name="devoir" value="2" id="choix2" /> <label for="choix2">2eme devoir</label><br/>
-<center><input type="image" src="button.png"></center>
-</pre></fieldset>
+
+	<h3 class="text-center">Ajouter un devoir</h3>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Matière</label>
+		<select class="col-2" name="choix_mat" id="choix">
+			<?php while($a=mysqli_fetch_array($donnee)){echo '<option value="'.$a['codemat'].'">'.$a['nommat'].'</option>';}?>
+		</select>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Date du devoir</label>
+		<input class="col-2" type="text" name="date" class="calendrier">
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Coefficient</label>
+		<select class="col-2" name="coefficient"><?php for($i=1;$i<=15;$i++){ echo '<option value="'.$i.'">'.$i.'</option>'; } ?>
+		</select>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Semestre</label>
+		<select class="col-2" name="semestre"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
+		</select>
+	</div>
+	<div class="row justify-content-center text-center m-4">
+		<h3 for="">1er / 2ème Devoir</h3>
+		<div class="col-2 justify-content-center text-center m-4">
+			<input type="radio" name="devoir" value="1" id="choix1" /> 
+			<label for="choix1">1er devoir</label>
+		</div>
+		<div class="col-2 justify-content-center text-center m-4">
+			<input type="radio" name="devoir" value="2" id="choix2" /> 
+			<label for="choix2">2eme devoir</label>
+		</div>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<input class="btn btn-dark" type="submit" value="Ajouter">
+	</div>
 </form>
 <?php }
 else if(isset($_POST['date'])){//s'il a cliquer sur ajouter la 2eme fois
@@ -69,35 +88,40 @@ $bool=true;
 	*/
 	if($nb['nb']>0){
 		$bool=false;
-		echo '<br\><h2>Erreur d\'insertion!! N� de devoir incorrect(impossible d\'ajouter deux devoirs similaires)</h2>';
+		echo '<br\><h2>Erreur d\'insertion!! N° de devoir incorrect(impossible d\'ajouter deux devoirs similaires)</h2>';
 	}
 	if($bool==true){
 	$codeclasse=mysqli_query($conn, "select codecl from classe where nom='$nomcl' and promotion='$promo'");
 	$code=mysqli_fetch_array($codeclasse);
 	$codecl=$code['codecl'];
 	mysqli_query($conn, "insert into devoir(date_dev,coeficient,codemat,codecl,numsem,n_devoir) values('$date','$coefficient','$codemat','$codecl','$semestre','$n_devoir')");
-	echo '<h1>Insertion avec succ�s </h1>';
+	echo '<h1>Insertion avec succès </h1>';
 	}
 }
  else {
  $retour=mysqli_query($conn, "select distinct nom from classe"); 
  $data=mysqli_query($conn, "select distinct promotion from classe order by promotion desc");
  ?>
- <form action="ajout_devoir.php" method="POST">
-    <FIELDSET>
- <LEGEND align=top>Classe/promotion<LEGEND>  <pre>
-Promotions      :        <select name="promotion"> 
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/><br/>
-Classe               :         <select name="nomcl"> 
-<?php while($a=mysqli_fetch_array($retour)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/><br/>
-<center><input type="submit" value="Suivant"></center>
-</pre></fieldset>
+<form action="ajout_devoir.php" method="POST" class="form">
+    <h3 class="text-center">Classe/promotion</h3> 
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Promotions</label>
+		<select class="col-2" name="promotion"> 
+		<?php while($a=mysqli_fetch_array($data)){
+		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+		}?></select>
+	</div> 
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Classe</label>
+		<select class="col-2" name="nomcl"> 
+		<?php while($a=mysqli_fetch_array($retour)){
+		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+		}?></select>
+	</div> 
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<input class="btn btn-dark col-2" type="submit" value="Suivant">
+	</div>
 </form>
 <?php } ?>
-</pre></center>
 </div>
 </html>

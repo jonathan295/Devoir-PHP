@@ -2,10 +2,10 @@
 include('cadre.php');
 include('calendrier.html');
 ?>
-<html>
-<div class="corp">
-<img src="titre_img/ajout_stage.png" class="position_titre">
-<center><pre>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+  	<img src="titre_img/ajout_stage.png" class="position_titre">
+  </div>
 <?php if(isset($_SESSION['modif_stage']) and isset($_POST['lieu'])){//si on a cliquer sur ajouter/modifier pour modifier le post pour ne pas entr
 	if(!empty($_POST['lieu']) and !empty($_POST['date_debut']) and !empty($_POST['date_fin'])){
 		$id=$_SESSION['modif_stage'];
@@ -16,7 +16,7 @@ include('calendrier.html');
 		mysqli_query($conn,"update stage set lieu_stage='$lieu', date_debut='$date_debut', date_fin='$date_fin' where numstage='$id'");
 		?> 	<SCRIPT LANGUAGE="Javascript">alert("Modification avec succes ! ");	</SCRIPT> 	<?php
 		unset($_SESSION['modif_stage']);
-			echo '<br/><br/><a href="index.php">Revenir à la page d\'accueill !</a>';
+			echo '<br/><br/><a class="btn btn-dark" href="index.php">Revenir à la page d\'accueill !</a>';
 
 	}
 	else{
@@ -39,28 +39,38 @@ if(!empty($_POST['lieu']) and !empty($_POST['date_debut']) and !empty($_POST['da
 	mysqli_query($conn,"insert into stage(lieu_stage,date_debut,date_fin,numel) values ('$lieu','$date_debut','$date_fin','$numel')");
 		?>	<SCRIPT LANGUAGE="Javascript">alert("Ajouté avec succès!");</SCRIPT> 	<?php
 	}
-	echo '<a href="index.php">Revenir à la page d\'accueill !</a>';
+	echo '<a class="btn btn-dark" href="index.php">Revenir à la page d\'accueill !</a>';
 }
 else{
 ?> 	<SCRIPT LANGUAGE="Javascript">alert("Vous devez remplir tous les champs!");	</SCRIPT> 	<?php
-echo '<a href="index.php">Revenir à la page d\'accueill !</a>';
+echo '<a class="btn btn-dark" href="index.php">Revenir à la page d\'accueill !</a>';
 }
 }
 else if(!isset($_POST['nomcl']) and !isset($_GET['modif_stage'])){
 	$data=mysqli_query($conn,"select distinct promotion from classe order by promotion desc");//select pour les promotions
 	$retour=mysqli_query($conn,"select distinct nom from classe");
  ?>
- <form action="ajout_stage.php" method="POST" class="formulaire">
- Veuillez choisir la classe et la promotion : <br/><br/>
-Promotion         :       <select name="promotion"> 
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/><br/>
-Classe                :        <select name="nomcl"> 
-<?php while($a=mysqli_fetch_array($retour)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/><br/>
-<center><input type="submit" value="Suivant"></center>
+<form action="ajout_stage.php" method="POST" class="form">
+	<h3 class="text-center">Veuillez choisir la classe et la promotion:</h3>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center justify-content-center m-4 flex-column align-items-center text-center">
+		<lablel class="col-4" for="">Promotion:</lablel class="col-4">
+		<select class="col-4" name="promotion"> 
+		<?php while($a=mysqli_fetch_array($data)){
+		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+		}?>
+		</select>
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center justify-content-center m-4 flex-column align-items-center text-center">
+		<lablel class="col-4" for="">Classe:</lablel class="col-4">
+		<select class="col-4" name="nomcl"> 
+		<?php while($a=mysqli_fetch_array($retour)){
+		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+		}?>
+		</select>
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center justify-content-center m-4 flex-column align-items-center text-center">
+		<input class="col-2 btn btn-dark" type="submit" value="Suivant">
+	</div>
 </form>
 <?php }
 if((isset($_POST['nomcl']) and isset($_POST['promotion'])) or isset($_GET['modif_stage'])){// si on a cliquer sur suivant ou sur modifier
@@ -84,20 +94,32 @@ else{//si c 'est l'ajout
 $data=mysqli_query($conn,"select numel,nomel,prenomel from eleve,classe where classe.codecl=eleve.codecl and nom='$nomcl' and promotion='$promo'");
 }
 ?>
-<form action="ajout_stage.php" method="POST" class="formulaire">
-Eleve                   :       <?php if(isset($_GET['modif_stage'])){echo $data['nomel'].' '.$data['prenomel'];}else{
-?> <select name="numel"> 
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['numel'].'">'.$a['nomel'].' '.$a['prenomel'].'</option>';
-}?></select><br/><br/> <?php
-} ?>
-
-Lieu de stage     :     <input type="text" name="lieu" value="<?php echo $lieu; ?>"><br/><br/>
-Date de debut       :        <input type="text" name="date_debut" class="calendrier" value="<?php echo $date_debut; ?>"><br/><br/>
-Date de fin        :      <input type="text" name="date_fin" class="calendrier" value="<?php echo $date_fin; ?>"><br/><br/>
-<center><input type="image" src="button.png"></center>
+<form action="ajout_stage.php" method="POST" class="form">
+	<div class="row justify-content-center m-4">
+		<lablel class="col-1" for="">Eleve:</lablel class="col-4">
+		<?php if(isset($_GET['modif_stage'])){echo $data['nomel'].' '.$data['prenomel'];}else{
+		?> <select class="col-2" name="numel"> 
+		<?php while($a=mysqli_fetch_array($data)){
+		echo '<option value="'.$a['numel'].'">'.$a['nomel'].' '.$a['prenomel'].'</option>';
+		}?></select>
+		<?php } ?>
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<lablel class="col-4" for="">Lieu de stage</lablel class="col-4">
+		<input class="col-8" type="text" name="lieu" value="<?php echo $lieu; ?>">
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<lablel class="col-4" for="">Date de debut</lablel class="col-4">
+		<input class="col-8" type="text" name="date_debut" class="calendrier" value="<?php echo $date_debut; ?>">
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<lablel class="col-4" for="">Date de fin</lablel class="col-4">
+		<input class="col-8" type="text" name="date_fin" class="calendrier" value="<?php echo $date_fin; ?>">
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<input class="btn btn-dark col-2" type="sublit" value="Ajouter">
+	</div>
 </form>
 <?php } ?>
-</pre></center>
 </div>
 </html>

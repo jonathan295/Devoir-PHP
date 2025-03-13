@@ -2,9 +2,10 @@
 include('cadre.php');
 $data=mysqli_query($conn, "select distinct promotion from classe order by promotion desc");
 ?>
-<div class="corp">
-<img src="titre_img/affich_enseign.png" class="position_titre">
-<center><pre>
+<div class="container d-flex align-items- justify-content-center flex-column">
+   <div class="container d-flex align-items- justify-content-center">
+   	<img src="titre_img/affich_enseign.png" class="position_titre">
+   </div>
 <?php
 if(isset($_POST['nomcl']) and isset($_POST['radiosem'])){
 	$nomcl=$_POST['nomcl'];
@@ -12,10 +13,10 @@ if(isset($_POST['nomcl']) and isset($_POST['radiosem'])){
 	$promo=$_POST['promotion'];
 	$donnee=mysqli_query($conn, "select enseignement.id,classe.nom as nomcl,nommat,prof.nom,numsem,promotion from enseignement,classe,matiere,prof where matiere.codemat=enseignement.codemat and enseignement.codecl=classe.codecl and prof.numprof=enseignement.numprof and classe.nom='$nomcl' and promotion='$promo' and enseignement.numsem='$semestre'");
 	?>
-	<center><table id="rounded-corner">
+	<table class="table table-hover table-striped table-bordered" id="rounded-corner">
 	<thead><tr><?php echo Edition();?><th class="<?php echo rond(); ?>">Classe</th>
 	<th class="rounded-q1">Promotion</th>
-	<th class="rounded-q1">Mati�re</th><th class="rounded-q1">Professeur</th><th class="rounded-q4">Semestre</th></tr></thead>
+	<th class="rounded-q1">Matière</th><th class="rounded-q1">Professeur</th><th class="rounded-q4">Semestre</th></tr></thead>
 	<tfoot>
 	<tr>
 	<td colspan="<?php echo colspan(4,6); ?>" class="rounded-foot-left"><em>&nbsp;</em></td>
@@ -30,32 +31,41 @@ if(isset($_POST['nomcl']) and isset($_POST['radiosem'])){
 			}
 	?>
 	<tbody>
+	<tr></tr>
 	</table>
-	<br/><br/><a href="afficher_enseign.php">Revenir � la page pr�c�dente !</a>
+	<a class="btn btn-dark" href="afficher_enseign.php">Revenir à la page précédente !</a>
 	<?php
 }
 else {
 $retour=mysqli_query($conn, "select distinct nom from classe");
 ?>
 
-<form method="post" action="afficher_enseign.php" class="formulaire">
-<FIELDSET>
- <LEGEND align=top>Crit�res d'affichage<LEGEND>  
-Classe         :        <select name="nomcl"> 
-<?php while($a=mysqli_fetch_array($retour)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/><br/>
- Promotion   :       <select name="promotion"> 
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/><br/>
-Semestre      :     <select name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
-</select><br/><br/>
-<input type="submit" value="afficher">
-</fieldset>
+<form method="post" action="afficher_enseign.php" class="form">
+	<h3 class="text-center">Critères d'affichage</h3> 
+	<div class="row justify-content-center flex-column align-items-center text-center m-4"">
+		<label for="">Classe</label>
+		<select class="col-2" name="nomcl"> 
+		<?php while($a=mysqli_fetch_array($retour)){
+		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+		}?></select>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4"">
+		<label for="">Promotion</label>
+		<select class="col-2" name="promotion"> 
+		<?php while($a=mysqli_fetch_array($data)){
+		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+		}?></select>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4"">
+		<label for="">Semestre</label>
+		<select class="col-2" name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
+		</select>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4"">
+		<input class="btn btn-dark col-2" type="submit" value="Afficher">
+	</div>
 </form>
 <?php } ?>
-</pre></center>
 </div>
 </body>
 </html>

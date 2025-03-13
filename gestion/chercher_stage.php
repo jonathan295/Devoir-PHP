@@ -1,29 +1,49 @@
 <?php
 include('cadre.php');
-if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])){
-echo '<html> <body> <div class="corp"> ';
-echo '<img src="titre_img/cherche_stage.png" class="position_titre"><center><pre>';
-if(isset($_GET['cherche_stage'])){ 
+?>
+<?php if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])): ?>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+  	<img src="titre_img/cherche_stage.png" class="position_titre">
+  </div>
+
+<?php if(isset($_GET['cherche_stage'])){ 
 $retour=mysqli_query($conn,"select distinct nom from classe"); // afficher les classes
 $data=mysqli_query($conn,"select distinct promotion from classe order by promotion desc");
 ?>
 
-<form action="chercher_stage.php" method="post" class="formulaire">
-Nom          :     <input type="text" name="nomel"><br/><br/>
-Prenom     :     <input type="text" name="prenomel"><br/><br/>
-vous pouvez préciser la promotion si vous voulez : <br/><select name="promotion"> 
-<option value="">Choisir la promotion</option>
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/><br/>
-Vous pouvez préciser la classe si vous voulez :<br/> <select name="nomcl"> 
-<option value="">Choisir la classe</option>
-<?php while($a=mysqli_fetch_array($retour)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/><br/>
-<input type="image" src="chercher.png">
+<form action="chercher_stage.php" method="post" class="form container">
+	<div class="row justify-content-center m-4 flex-column align-items-center">
+		<label class="col-6" for="">Nom:</label>
+		<input class="col-6" type="text" name="nomel">
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center">
+		<label class="col-6" for="">Prenom:</label>
+		<input class="col-6" type="text" name="prenomel">
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<label class="col-8" for="">vous pouvez préciser la promotion si vous voulez:</label>
+		<select class="col-4" name="promotion"> 
+			<option value="">Choisir la promotion</option>
+			<?php while($a=mysqli_fetch_array($data)){
+			echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+			}?>
+		</select>
+	</div>
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<label class="col-8" for="">Vous pouvez préciser la classe si vous voulez:</label>
+		<select class="col-4" name="nomcl"> 
+			<option value="">Choisir la classe</option>
+			<?php while($a=mysqli_fetch_array($retour)){
+			echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+			}?>
+		</select>
+	</div>
+	<div class="row justify-content-center m-4">
+		<input class="btn btn-dark col-3" type="submit" value="rechercher">
+	</div>
 </form>
-<br/><br/><a href="index.php">Revenir à la page principale!</a>
+<a class="btn btn-dark" href="index.php">Revenir à la page principale!</a>
 <?php
 }
 else if(isset($_POST['nomel'])){
@@ -40,7 +60,7 @@ else if(isset($_POST['nomel'])){
 	$option="and eleve.codecl=(select codecl from classe where nom='$nomcl' and promotion='$promo')";
 	$cherche=mysqli_query($conn,"select * from eleve,stage,classe where classe.codecl=eleve.codecl and stage.numel=eleve.numel and nomel LIKE '%$nomel%' and prenomel LIKE '%$prenomel%' ".$option."");//option contient les info suplimentaire
 ?>
-<center><table id="rounded-corner">
+<table id="rounded-corner" class="table table-striped table-hover table-bordered">
 <thead><tr><th class="rounded-company">Nom</th>
 <th class="rounded-q1">Prenom</th>
 <th class="rounded-q3">Lieu du stage</th>
@@ -60,11 +80,11 @@ else if(isset($_POST['nomel'])){
 	?>
 	</tbody>
 	</table></center>
-	<br/><br/><a href="chercher_stage.php?cherche_stage=true">Revenir à la page précédente !</a>
+	<a class="btn btn-dark" href="chercher_stage.php?cherche_stage=true">Revenir à la page précédente !</a>
 	<?php
 	}
-}
 ?>
+<?php endif; ?>
 </pre>
 </div>
 </center>

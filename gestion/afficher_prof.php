@@ -1,15 +1,14 @@
 <?php
 include('cadre.php');
 ?>
-
-<html>
-<div class="corp">
-<img src="titre_img/affich_prof.png" class="position_titre">
-<pre>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+    <img src="titre_img/affich_prof.png" class="position_titre">
+  </div>
 <?php
 $data=mysqli_query($conn, "select * from prof");
 ?>
-<center><table id="rounded-corner">
+<table id="rounded-corner" class="table table-striped table-hover table-bordered">
 <thead><tr><?php echo Edition();?>
  <th scope="col" class="<?php echo rond(); ?>">Nom</th>
  <th scope="col" class="rounded-q2">Prenom</th>
@@ -29,14 +28,14 @@ while($a=mysqli_fetch_array($data)){
 ?>
 <tr><?php if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])){
 echo '<tr><td><a href="modif_prof.php?modif_prof='.$a['numprof'].'">modifier</a></td><td><a href="modif_prof.php?supp_prof='.$a['numprof'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));">supprimer</a></td>';}
-echo '<td>'.$a['nom'].'</td><td>'.$a['prenom'].'</td><td>'.$a['adresse'].'</td><td>'.$a['telephone'].'</td><td><a href="option_prof.php?matiere='.$a['numprof'].'">Voir</a><td><a href="option_prof.php?classe='.$a['numprof'].'">Voir</a></tr>';
+echo '<td>'.$a['nom'].'</td><td>'.$a['prenom'].'</td><td>'.$a['adresse'].'</td><td>'.$a['telephone'].'</td><td class="text-center" ><a href="option_prof.php?matiere='.$a['numprof'].'">Voir</a><td class="text-center" ><a href="option_prof.php?classe='.$a['numprof'].'">Voir</a></tr><tr></tr>';
 }
 ?>
 <tbody>
-</table></center>
+</table>
 <?php
-echo '<br/><br/><a href="index.php">Revenir à la page précédente !</a>';
+echo '<a class="btn btn-dark" href="index.php">Revenir à la page précédente !</a>';
 ?>
 </pre>
-</div>
+</>
 </html>

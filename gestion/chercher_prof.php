@@ -1,29 +1,49 @@
 <?php
 include('cadre.php');
-if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])){
-echo '<html> <body> <div class="corp">';
-echo '<img src="titre_img/cherche_prof.png" class="position_titre"><pre>';
-if(isset($_GET['cherche_prof'])){ 
+?>
+<?php if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])): ?>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+  	<img src="titre_img/cherche_prof.png" class="position_titre">
+  </div>
+
+<?php if(isset($_GET['cherche_prof'])){ 
 $retour=mysqli_query($conn, "select distinct nom from classe"); // afficher les classes
 $data=mysqli_query($conn, "select distinct promotion from classe order by promotion desc");
 ?>
 
-<form action="chercher_prof.php" method="post" class="formulaire">
-Nom du prof: <input type="text" name="nomel"><br/>
-Prenom du prof: <input type="text" name="prenomel"><br/>
-vous pouvez préciser la promotion si vous voulez : <br/><br/><select name="promotion"> 
-<option value="">Choisir la promotion</option>
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/>
-Vous pouvez préciser la classe si vous voulez : <br/><br/><select name="nomcl"> 
-<option value="">Choisir la classe</option>
-<?php while($a=mysqli_fetch_array($retour)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/><br/>
-<input type="image" src="chercher.png">
+<form action="chercher_prof.php" method="post" class="form">
+	<div class="row m-4 justify-content-center">
+		<label class="col-2" for="">Nom du prof:</label class="col-4">
+		<input class="col-4" type="text" name="nomel">
+	</div>
+	<div class="row m-4 justify-content-center">
+		<label class="col-2" for="">Prenom du prof:</label class="col-4">
+		<input class="col-4" type="text" name="prenomel">
+	</div>
+	<div class="row m-4 justify-content-center flex-column align-items-center">
+		<label class="col-6 text-center" for="">vous pouvez préciser la promotion si vous voulez :</label class="col-4">
+		<select class="col-4" name="promotion"> 
+			<option value="">Choisir la promotion</option>
+			<?php while($a=mysqli_fetch_array($data)){
+			echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+			}?>
+		</select>
+	</div>
+	<div class="row m-4 justify-content-center flex-column align-items-center">
+		<label class="col-6 text-center" for="">Vous pouvez préciser la classe si vous voulez :</label class="col-4">
+		<select class="col-4" name="nomcl"> 
+			<option value="">Choisir la classe</option>
+			<?php while($a=mysqli_fetch_array($retour)){
+			echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+			}?>
+		</select>
+	</div>
+	<div class="row m-4 justify-content-center">
+		<input class="btn btn-dark col-2" class="btn btn-dark col-2" type="submit" value="Rechercher">
+	</div>
 </form>
-<br/><br/><a href="index.php">Revenir à la page principale!</a>
+<a class="btn btn-dark" href="index.php">Revenir à la page principale!</a>
 <?php
 }
 else if(isset($_POST['nomel'])){
@@ -40,7 +60,7 @@ else if(isset($_POST['nomel'])){
 	$option="and classe.nom='$nomcl' and promotion='$promo'";
 	$cherche=mysqli_query($conn, "select classe.codecl,prof.numprof,prof.nom as nomp,nommat,prof.prenom as prenomp,adresse,telephone,classe.nom,promotion from prof,classe,enseignement,matiere where matiere.codemat=enseignement.codemat and classe.codecl=enseignement.codecl and prof.numprof=enseignement.numprof and prof.nom LIKE '%$nomprof%' and prof.prenom LIKE '%$prenomprof%' ".$option."");//option contient les info suplimentaire
 ?>
-<center><table id="rounded-corner">
+<table id="rounded-corner" class="table table-striped table-hover table-bordered">
 <thead><tr><th class="rounded-company">Nom du prof</th>
 <th class="rounded-q1">Prenom du prof</th>
 <th class="rounded-q3">Adresse</th>
@@ -55,16 +75,16 @@ else if(isset($_POST['nomel'])){
  <tbody>
  <?php
 	while($a=mysqli_fetch_array($cherche)){
-		echo '<tr><td>'.$a['nomp'].'</td><td>'.$a['prenomp'].'</td><td >'.$a['adresse'].'</td><td >'.$a['telephone'].'</td><td>'.$a['nom'].'</td><td>'.$a['nommat'].'</td><td>'.$a['promotion'].'</td></tr>';
+		echo '<tr><td>'.$a['nomp'].'</td><td>'.$a['prenomp'].'</td><td >'.$a['adresse'].'</td><td >'.$a['telephone'].'</td><td>'.$a['nom'].'</td><td>'.$a['nommat'].'</td><td>'.$a['promotion'].'</td></tr><tr></tr>';
 	}
 	?>
 	</tbody>
-	</table></center>
-	<br/><br/><a href="chercher_prof.php?cherche_prof=true">Revenir à la page precedente !</a>
+	</table>
+	<a class="btn btn-dark" href="chercher_prof.php?cherche_prof=true">Revenir à la page precedente !</a>
 	<?php
 	}
-}
 ?>
-</pre></div>
+<?php endif; ?>
+</div>
 </body>
 </html>

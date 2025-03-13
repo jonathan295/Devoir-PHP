@@ -1,9 +1,10 @@
 <?php
 include('cadre.php');
 ?>
-<div class="corp">
-<img src="titre_img/ajout_conseil.png" class="position_titre">
-<pre>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+    <img src="titre_img/ajout_conseil.png" class="position_titre">
+  </div>
 <?php
 if(isset($_POST['nomcl']) and isset($_POST['radiosem'])){
 $nomcl=$_POST['nomcl'];
@@ -34,7 +35,7 @@ mysqli_query($conn, "insert into bulletin(numsem,numel,codemat,notefinal) values
 ?>	<SCRIPT LANGUAGE="Javascript">alert("Ajouté avec succès!");</SCRIPT> 	<?php
 }
 ?>
-<br/><br/><a href="ajout_conseil.php">Revenir à la page précédente !</a>
+<a class="btn btn-dark" href="ajout_conseil.php">Revenir à la page précédente !</a>
 </form>
 
 <?php
@@ -43,22 +44,33 @@ else {
 $data=mysqli_query($conn, "select distinct promotion from classe order by promotion desc");
 $retour=mysqli_query($conn, "select distinct nom from classe"); // afficher les classes
 ?>
-<form method="post" action="ajout_conseil.php" class="formulaire">
-Veuillez choisir le Semestre, la promotion et la classe :<br/><br/><br/>
-Promotion      :       <select name="promotion"> 
-<?php while($a=mysqli_fetch_array($data)){
-echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-}?></select><br/><br/>
-Classe              :       <select name="nomcl"> 
-<?php while($a=mysqli_fetch_array($retour)){
-echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-}?></select><br/><br/>
-Semestre        :        <select name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
-</select><br/><br/>
-<input type="submit" value="Valider le conseil">
+<form method="post" action="ajout_conseil.php" class="form">
+    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+        <h3 class="text-center">Veuillez choisir le Semestre, la promotion et la classe</h3>
+    </div>
+    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+        <label for="">Promotion</label>
+        <select class="col-2" name="promotion"> 
+            <?php while($a=mysqli_fetch_array($data)){echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';}?>
+        </select>
+    </div>
+    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+        <label for="">Classe</label>
+        <select class="col-2" name="nomcl"> 
+            <?php while($a=mysqli_fetch_array($retour)){echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>'; }?>
+        </select>
+    </div>
+    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+        <label for="">Semestre</label>
+        <select class="col-2" name="radiosem">
+            <?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
+        </select>
+    </div>
+    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+        <input class="col-2 btn btn-dark" type="submit" value="Valider le conseil">
+    </div>
 </form>
 <?php } ?>
-</pre>
 </div>
 </body>
 </html>
