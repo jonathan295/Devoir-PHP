@@ -1,0 +1,26 @@
+.formulaire{
+    width: 500px; 
+    text-align: center; 
+    border: 1px solid black; 
+    padding: 1%; 
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.font-weight-bold{
+    font-weight: bolder;
+    font-size: 120%;
+}
+
+select{
+    background: white;
+    border: none;
+}
+
+
+
+@media (max-width: 500px) {
+    .formulaire{
+        width: 400px;
+    }
+}
