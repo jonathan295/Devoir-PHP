@@ -1,12 +1,9 @@
 <?php
-session_start();
 include('cadre.php');
 include('calendrier.html');
-mysql_connect("localhost", "root", "");
-mysql_select_db("gestion");
-if(isset($_GET['modif_el'])){//modif_el qu'on a recupérer de l'affichage (modifier)
+if(isset($_GET['modif_el'])){//modif_el qu'on a recupï¿½rer de l'affichage (modifier)
 $id=$_GET['modif_el'];
-$ligne=mysql_fetch_array(mysql_query("select * from eleve,classe where eleve.codecl=classe.codecl and numel='$id'"));
+$ligne=mysqli_fetch_array(mysqli_query($conn, "select * from eleve,classe where eleve.codecl=classe.codecl and numel='$id'"));
 $nom=stripslashes($ligne['nomel']);
 $prenom=stripslashes($ligne['prenomel']);
 $date=stripslashes($ligne['date_naissance']);
@@ -14,23 +11,48 @@ $phone=stripslashes($ligne['telephone']);
 $adresse=str_replace("<br />",' ',$ligne['adresse']);
 $codecl=stripslashes($ligne['codecl']);
 ?>
-<div class="corp">
-<img src="titre_img/modif_eleve.png" class="position_titre">
-<center><pre>
-<form action="modif_eleve.php" method="POST" class="formulaire">
-   <FIELDSET>
- <LEGEND align=top>Modifier un étudiant<LEGEND>  <pre>
-Nom étudiant        :           <?php echo $nom; ?><br/>
-Prénom                   :          <?php echo $prenom; ?><br/>
-Date de naissanc     :               <input type="text" name="date" class="calendrier" value="<?php echo $date; ?>"><br/>
-Adresse                   :        <textarea name="adresse" ><?php echo $adresse; ?></textarea><br/>
-Telephone                :          <input type="text" name="phone" value="<?php echo $phone; ?>"><br/>
-Classe                      :              <?php echo $ligne['nom']; ?><br/>
-Promotion               :             <?php echo $ligne['promotion']; ?>
-<input type="hidden" name="id" value="<?php echo $id; ?>"><br/>
-<input type="image" src="button.png">
-</pre></fieldset>
-</form><a href="listeEtudiant.php?nomcl=<?php echo $ligne['nom']; ?>">Revenir à la page précédente !</a>
+<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+  	<img src="titre_img/modif_eleve.png" class="position_titre">
+  </div>
+<form action="modif_eleve.php" method="POST" class="form">
+	<h3 class="text-center">Modifier un Ã©tudiant</h3>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Nom Ã©tudiant</label>
+		<p><?php echo $nom; ?></p>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">PrÃ©nom</label>
+		<p><?php echo $prenom; ?></p>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Date de naissance</label>
+		<input class="col-2 text-center" type="text" name="date" class="calendrier" value="<?php echo $date; ?>">
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Adresse</label>
+		<textarea name="adresse"><?php echo $adresse; ?></textarea>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Telephone</label>
+		<input class="col-2 text-center" type="text" name="phone" value="<?php echo $phone; ?>">
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Classe</label>
+		<?php echo $ligne['nom']; ?>
+	</div>
+	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+		<label for="">Promotion</label>
+		<?php echo $ligne['promotion']; ?>
+	</div>
+	<!-- <div class="row justify-content-center flex-column align-items-center text-center m-4"> -->
+		<input type="hidden" name="id" value="<?php echo $id; ?>">
+	<!-- </div> -->
+	<div class="row justify-content-center text-center m-4">
+		<input type="submit" value="MODIFIER" class="btn btn-dark col-2">
+	</div>
+</form>
+<a class="btn btn-dark" href="listeEtudiant.php?nomcl=<?php echo $ligne['nom']; ?>">Revenir Ã  la page prÃ©cÃ©dente !</a>
 </div>
 <?php
 }
@@ -40,27 +62,25 @@ if(isset($_POST['adresse'])){
 		$date=addslashes(Htmlspecialchars($_POST['date']));
 		$phone=addslashes(Htmlspecialchars($_POST['phone']));
 		$adresse=addslashes(Nl2br(Htmlspecialchars($_POST['adresse'])));
-		mysql_query("update eleve set date_naissance='$date', adresse='$adresse', telephone='$phone' where numel='$id'");
-		?> <SCRIPT LANGUAGE="Javascript">	alert("Modifié avec succés!"); </SCRIPT> 
+		mysqli_query($conn, "update eleve set date_naissance='$date', adresse='$adresse', telephone='$phone' where numel='$id'");
+		?> <SCRIPT LANGUAGE="Javascript">	alert("ModifiÃ© avec succÃ¨s!"); </SCRIPT> 
 		<?php
 		
 	}
 	else{
 	?> <SCRIPT LANGUAGE="Javascript">	alert("erreur! Vous devez remplire tous les champss"); </SCRIPT> <?php
 	}
-	echo '<div class="corp"><br/><br/><a href="modif_eleve.php?modif_el='.$id.'">Revenir à la page precedente !</a></div>';
+	echo '<a style="width: 100%;" class="btn btn-dark" href="modif_eleve.php?modif_el='.$id.'">Revenir Ã  la page precedente !</a>';
 }
 if(isset($_GET['supp_el'])){
 $id=$_GET['supp_el'];
-mysql_query("delete from eleve where numel='$id'");
-mysql_query("delete from evaluation where numel='$id'");/*	Supprimier tous les entres en relation		*/
-mysql_query("delete from stage where numel='$id'");
-mysql_query("delete from bulletin where numel='$id'");
-?> <SCRIPT LANGUAGE="Javascript">	alert("Supprimé avec succés!"); </SCRIPT> <?php
-echo '<br/><br/><a href="index.php?">Revenir à la page principale !</a>';
+mysqli_query($conn, "delete from eleve where numel='$id'");
+mysqli_query($conn, "delete from evaluation where numel='$id'");/*	Supprimier tous les entres en relation		*/
+mysqli_query($conn, "delete from stage where numel='$id'");
+mysqli_query($conn, "delete from bulletin where numel='$id'");
+?> <SCRIPT LANGUAGE="Javascript">	alert("SupprimÃ© avec succÃ¨s!"); </SCRIPT> <?php
+echo '<a class="btn btn-dark" href="/gestion00/index.php?">Revenir Ã  la page principale !</a>';
 }
 ?>
-</center></pre>
-
 </body>
 </html>

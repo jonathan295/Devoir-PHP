@@ -110,11 +110,11 @@ $data=mysqli_query($conn,"select numel,nomel,prenomel from eleve,classe where cl
 	</div>
 	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
 		<lablel class="col-4" for="">Date de debut</lablel class="col-4">
-		<input class="col-8" type="text" name="date_debut" class="calendrier" value="<?php echo $date_debut; ?>">
+		<input class="col-2 calendrier" type="text" name="date_debut" value="<?php echo $date_debut; ?>">
 	</div>
 	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
 		<lablel class="col-4" for="">Date de fin</lablel class="col-4">
-		<input class="col-8" type="text" name="date_fin" class="calendrier" value="<?php echo $date_fin; ?>">
+		<input class="col-2 calendrier" type="text" name="date_fin" value="<?php echo $date_fin; ?>">
 	</div>
 	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
 		<input class="btn btn-dark col-2" type="sublit" value="Ajouter">

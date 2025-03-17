@@ -61,7 +61,7 @@ $retour=mysqli_query($conn, "select distinct nom from classe");
 		<select class="col-2" name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
 		</select>
 	</div>
-	<div class="row justify-content-center flex-column align-items-center text-center m-4"">
+	<div class="row justify-content-center text-center m-4"">
 		<input class="btn btn-dark col-2" type="submit" value="Afficher">
 	</div>
 </form>

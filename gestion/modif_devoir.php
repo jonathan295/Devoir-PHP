@@ -1,30 +1,58 @@
 <?php
-session_start();
 include('cadre.php');
 include('calendrier.html');
-echo '<div class="corp">';
-if(isset($_GET['modif_dev'])){//modif_el qu'on a recupérer de l'affichage (modifier)
+echo '<div class="container d-flex align-items- justify-content-center flex-column">';
+if(isset($_GET['modif_dev'])){//modif_el qu'on a recupï¿½rer de l'affichage (modifier)
 $id=$_GET['modif_dev'];
-$ligne=mysql_fetch_array(mysql_query("select * from classe,devoir,matiere where classe.codecl=devoir.codecl and matiere.codemat=devoir.codemat and numdev='$id'"));//Pour afficher le nom de l'eleve et la note par deflault et le devoir,
+$ligne=mysqli_fetch_array(mysqli_query($conn, "select * from classe,devoir,matiere where classe.codecl=devoir.codecl and matiere.codemat=devoir.codemat and numdev='$id'"));//Pour afficher le nom de l'eleve et la note par deflault et le devoir,
 $date=$ligne['date_dev'];
 
 ?>
-<center><pre><h1>Modifier un devoir</h1>
-<form action="modif_devoir.php" method="POST" class="formulaire">
-Matiére :<?php echo $ligne['nommat']; ?><br/>
-Classe : <?php echo stripslashes($ligne['nom']); ?><br/>
-Promotion : <?php echo $ligne['promotion']; ?><br/>
-Coefficient : <input type="text" name="coeficient" value="<?php echo $ligne['coeficient']; ?>"><br/>
-Semestre : <?php echo $ligne['numsem']; ?><br/>
-Devoir N° : <input type="text" name="n_devoir" value="<?php echo $ligne['n_devoir']; ?>"><br/>
-Date du devoir     :     <input type="text" name="date" class="calendrier" value="<?php echo $date; ?>"/>
-<input type="hidden" name="id" value="<?php echo $id; ?>"><!-- pour revenir en arriere et pour avoir l'id dont lequel on va modifier-->
-<input type="hidden" name="numdev" value="<?php echo $ligne['numdev']; ?>">
-<input type="hidden" name="id" value="<?php echo $id; ?>">
-<input type="image" src="modifier.png">
+<h1 class="text-center">Modifier un devoir</h1>
+<form action="modif_devoir.php" method="POST" class="form">
+	<div class="row">
+		<label for="">MatiÃ¨re</label>
+		<?php echo $ligne['nommat']; ?>
+	</div>
+	<div class="row">
+		<label for="">Classe</label>
+		<?php echo stripslashes($ligne['nom']); ?>
+	</div>
+	<div class="row">
+		<label for="">Promotion</label>
+		<?php echo $ligne['promotion']; ?>
+	</div>
+	<div class="row">
+		<label for="">Coefficient</label>
+		<input type="text" name="coeficient" value="<?php echo $ligne['coeficient']; ?>">
+	</div>
+	<div class="row">
+		<label for="">Semestre</label>
+		<?php echo $ligne['numsem']; ?>
+	</div>
+	<div class="row">
+		<label for="">NÂ° Devoir</label>
+		<input type="text" name="n_devoir" value="<?php echo $ligne['n_devoir']; ?>">
+	</div>
+	<div class="row">
+		<label for="">Date du devoir</label>
+		<input type="text" name="date" class="calendrier" value="<?php echo $date; ?>"/>
+	</div>
+	<div class="row">
+		<input type="hidden" name="id" value="<?php echo $id; ?>"><!-- pour revenir en arriere et pour avoir l'id dont lequel on va modifier-->
+	</div>
+	<div class="row">
+		<input type="hidden" name="numdev" value="<?php echo $ligne['numdev']; ?>">
+	</div>
+	<div class="row">
+		<input type="hidden" name="id" value="<?php echo $id; ?>">
+	</div>
+	<div class="row">
+		<input type="submit" value="Modifier" class="btn btn-dark">
+	</div>
 </form>
 <?php
-echo '<br/><br/><a href="afficher_devoir.php">Revenir à la page précédente !</a>';
+echo '<a class="btn btn-dark" href="afficher_devoir.php">Revenir Ã  la page prÃ©cÃ©dente !</a>';
 }
 if(isset($_POST['n_devoir'])){//s'il a cliquer sur le bouton modifier
 	$id=$_POST['id'];
@@ -33,27 +61,26 @@ if(isset($_POST['n_devoir'])){//s'il a cliquer sur le bouton modifier
 		$numdev=$_POST['numdev'];
 		$coeficient=$_POST['coeficient'];
 		$date=$_POST['date'];
-		$compte=mysql_fetch_array(mysql_query("select count(*) as nb from devoir where n_devoir='$n_devoir' and numdev='$numdev' and date_dev='$date'"));
+		$compte=mysqli_fetch_array(mysqli_query($conn, "select count(*) as nb from devoir where n_devoir='$n_devoir' and numdev='$numdev' and date_dev='$date'"));
 		if($compte['nb']!=0){//deux devoir similaire()2 devoirs par matiere
-		?> <SCRIPT LANGUAGE="Javascript">	alert("erreur de modification,ce devoir existe déja(verifier le numero de devoir)"); </SCRIPT> <?php
+		?> <SCRIPT LANGUAGE="Javascript">	alert("erreur de modification,ce devoir existe dÃ©ja(verifier le numero de devoir)"); </SCRIPT> <?php
 		}
 		else{
-		mysql_query("update devoir set n_devoir='$n_devoir', coeficient='$coeficient',date_dev='$date' where numdev='$id'");
-		?> <SCRIPT LANGUAGE="Javascript">	alert("Modifié avec succés!"); </SCRIPT> <?php
+		mysqli_query($conn, "update devoir set n_devoir='$n_devoir', coeficient='$coeficient',date_dev='$date' where numdev='$id'");
+		?> <SCRIPT LANGUAGE="Javascript">	alert("ModifiÃ© avec succÃ¨s!"); </SCRIPT> <?php
 		}
 	}
 	else{
-		?> <SCRIPT LANGUAGE="Javascript">	alert("erreur! Vous devez remplire tous les champs(n° de devoir 1 ou 2)"); </SCRIPT> <?php
+		?> <SCRIPT LANGUAGE="Javascript">	alert("erreur! Vous devez remplire tous les champs(nÂ° de devoir 1 ou 2)"); </SCRIPT> <?php
 		}
-	echo '<br/><br/><a href="modif_devoir.php?modif_dev='.$id.'">Revenir à la page precedente !</a>';
+	echo '<br/><br/><a href="modif_devoir.php?modif_dev='.$id.'">Revenir Ã  la page precedente !</a>';
 }
 if(isset($_GET['supp_dev'])){
 $id=$_GET['supp_dev'];
-mysql_query("delete from devoir where numdev='$id'");
-mysql_query("delete from evaluation where numdev='$id'");
-?> <SCRIPT LANGUAGE="Javascript">	alert("Supprimé avec succés!\ntous les evaluations de ce devoir ont été supprimées"); </SCRIPT> <?php
-echo '<br/><br/><a href="afficher_devoir.php">Revenir à la page à l\'affichage</a>'; //on revient à la page princippale car on n'a plus l'id dont on affiche la matiere dans la modification
+mysqli_query($conn, "delete from devoir where numdev='$id'");
+mysqli_query($conn, "delete from evaluation where numdev='$id'");
+?> <SCRIPT LANGUAGE="Javascript">	alert("SupprimÃ© avec succÃ¨s!\ntous les evaluations de ce devoir ont Ã©tÃ© supprimÃ©es"); </SCRIPT> <?php
+echo '<br/><br/><a href="afficher_devoir.php">Revenir Ã  la page Ã  l\'affichage</a>'; //on revient ï¿½ la page princippale car on n'a plus l'id dont on affiche la matiere dans la modification
 }
 ?>
-</center></pre>
 </div>

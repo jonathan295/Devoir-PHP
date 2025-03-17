@@ -21,7 +21,7 @@ $donnee=mysqli_query($conn,"select * from diplome");
 <?php
 while($a=mysqli_fetch_array($donnee)){
 if(isset($_SESSION['admin'])){
-echo '<td><a href="type_diplome.php?supp_type='.$a['numdip'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entr�e?\'));">Supprimer</td>'; } echo '<td>'.$a['titre_dip'].'</td></tr>'; 
+echo '<td><a href="type_diplome.php?supp_type='.$a['numdip'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));">Supprimer</td>'; } echo '<td>'.$a['titre_dip'].'</td></tr>'; 
 }
 ?>
 </tbody>

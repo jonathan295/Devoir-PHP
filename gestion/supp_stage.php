@@ -1,19 +1,18 @@
 <?php
-session_start();
+
 include('cadre.php');
-mysql_connect("localhost", "root", "");
-mysql_select_db("gestion");
+
 ?>
 <html>
 <div class="corp">
-<center><h1>Supression du stage</h1></center>
+<h1 class="text-center">Supression du stage</h1>
 <div class="formulaire">
 <?php
 if(isset($_GET['supp_stage'])){
 $id=$_GET['supp_stage'];
-mysql_query("delete from stage where numstage='$id'");
+mysqli_query($conn, "delete from stage where numstage='$id'");
 echo '<h1>Suppression avec succes ! </h1>';
-echo '<br/><br/><a href="index.php">Revenir à la page d\'accueill !</a>';
+echo '<a class="btn btn-dark" href="index.php">Revenir Ã  la page d\'accueill !</a>';
 }
 ?>
 </div>

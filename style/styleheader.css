@@ -2,6 +2,7 @@
     font-size: 100%;
 }
 
+
 .dropdown:hover > .dropdown-menu, .dropend:hover > .dropdown-menu{
     display: block;
     border-radius: 0 !important;
@@ -47,4 +48,5 @@ optgroup{
 
 .nav-link{
     text-align: center;
+    color: white;
 }

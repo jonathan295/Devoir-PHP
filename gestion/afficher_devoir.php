@@ -26,7 +26,7 @@ $_SESSION['classe']=$nomcl;
       }
       ?>
    </div>
-   <div class="row m-4 text-center justify-content-center flex-column align-items-center">
+   <div class="row m-4 text-center justify-content-center">
       <input class="btn btn-dark col-2" type="submit" value="Afficher les devoirs">
    </div>
 </form>
@@ -83,7 +83,7 @@ $retour=mysqli_query($conn, "select distinct nom from classe"); // afficher les 
       <select class="col-2" name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
       </select>
    </div>
-   <div class="row m-4 text-center justify-content-center flex-column align-items-center">
+   <div class="row m-4 text-center justify-content-center">
       <input class="btn btn-dark col-2" type="submit" value="Afficher les matieres">
    </div>
 </form>

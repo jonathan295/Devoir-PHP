@@ -15,7 +15,6 @@ $promo=$_POST['promotion'];
 $_SESSION['promo']=$promo;
 $donnee=mysqli_query($conn, "select codemat,nommat from matiere,classe where matiere.codecl=classe.codecl and nom='$nomcl' and promotion='$promo'");
 ?>
-
 	<h3 class="text-center">Ajouter un devoir</h3>
 	<div class="row justify-content-center flex-column align-items-center text-center m-4">
 		<label for="">Matière</label>
@@ -25,7 +24,7 @@ $donnee=mysqli_query($conn, "select codemat,nommat from matiere,classe where mat
 	</div>
 	<div class="row justify-content-center flex-column align-items-center text-center m-4">
 		<label for="">Date du devoir</label>
-		<input class="col-2" type="text" name="date" class="calendrier">
+		<input class="col-2 calendrier" type="text" name="date">
 	</div>
 	<div class="row justify-content-center flex-column align-items-center text-center m-4">
 		<label for="">Coefficient</label>
@@ -48,7 +47,7 @@ $donnee=mysqli_query($conn, "select codemat,nommat from matiere,classe where mat
 			<label for="choix2">2eme devoir</label>
 		</div>
 	</div>
-	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+	<div class="row justify-content-center text-center m-4">
 		<input class="btn btn-dark" type="submit" value="Ajouter">
 	</div>
 </form>
@@ -118,7 +117,7 @@ $bool=true;
 		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
 		}?></select>
 	</div> 
-	<div class="row justify-content-center flex-column align-items-center text-center m-4">
+	<div class="row justify-content-center text-center m-4">
 		<input class="btn btn-dark col-2" type="submit" value="Suivant">
 	</div>
 </form>

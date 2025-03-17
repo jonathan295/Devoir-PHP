@@ -22,11 +22,11 @@ include('cadre.php');
       </select>
     </div>
     <div class="row m-4 justify-content-center">
-      <input class="col-2" type="submit" value="afficher">
+      <input class="btn btn-blue col-2" type="submit" value="AFFICHER">
     </div>
   </form>
   <div class="row m-4 justify-content-center">
-    <a class="col-4 btn btn-dark" href="index.php?">Revenir à la page précédente !</a>
+    <a class="btn btn-dark" href="index.php?">Revenir à la page précédente !</a>
   </div>
   
 <?php endif; ?>

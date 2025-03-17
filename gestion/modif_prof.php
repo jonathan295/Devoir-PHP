@@ -1,6 +1,9 @@
 <?php
 include('cadre.php');
-echo '<div class="corp"><img src="titre_img/modif_prof.png" class="position_titre"><pre>';
+echo '<div class="container d-flex align-items- justify-content-center flex-column">
+  <div class="container d-flex align-items- justify-content-center">
+  	<img src="titre_img/modif_prof.png" class="position_titre">
+  </div>';
 if(isset($_GET['modif_prof'])){//modif_el qu'on a recup�rer de l'affichage (modifier)
 $id=$_GET['modif_prof'];
 $ligne=mysqli_fetch_array(mysqli_query($conn,"select * from prof where numprof='$id'"));
@@ -10,15 +13,29 @@ $phone=stripslashes($ligne['telephone']);
 $adresse=stripslashes($ligne['adresse']);
 ?>
 
-<form action="modif_prof.php" method="POST" class="formulaire">
-Nom étudiant       :       <?php echo $nom; ?><br/><br/>
-Prénom                  :     <?php echo $prenom; ?><br/><br/>
-Adresse                :       <textarea name="adresse" ><?php echo $adresse; ?></textarea><br/><br/>
-Telephone             :         <input type="text" name="phone" value="<?php echo $phone; ?>"><br/><br/>
-<input type="hidden" name="id" value="<?php echo $id; ?>">
-<center><input type="image" src="button.png"></center>
+<form action="modif_prof.php" method="POST" class="form">
+	<div class="row justify-content-center text-center m-4">
+		<label for="">Nom étudiant</label>
+		<p><?php echo $nom; ?></p>
+	</div>
+	<div class="row justify-content-center text-center m-4">
+		<label for="">Prénom</label>
+		<p><?php echo $prenom; ?></p>
+	</div>
+	<div class="row justify-content-center text-center m-4">
+		<label for="">Adresse</label>
+		<textarea class="col-8" name="adresse" ><?php echo $adresse; ?></textarea>
+	</div>
+	<div class="row justify-content-center text-center m-4">
+		<label for="">Telephone</label>
+		<input class="col-8" type="text" name="phone" value="<?php echo $phone; ?>">
+	</div>
+	<input type="hidden" name="id" value="<?php echo $id; ?>">
+	<div class="row justify-content-center text-center m-4">
+		<input class="col-2 btn btn-dark" type="submit" value="MODIFIER">
+	</div>
 </form>
-<br/><br/><a href="afficher_prof.php?nomcl=<?php echo $ligne['nom']; ?>">Revenir à la page précédente !</a>
+<a class="btn btn-dark" href="afficher_prof.php?nomcl=<?php echo $ligne['nom']; ?>">Revenir à la page précédente !</a>
 <?php
 }
 if(isset($_POST['nom'])){

@@ -22,8 +22,7 @@ if($_POST['mdp']!="" and $_POST['pseudo']!=""){
 	else{
 	?> 	<SCRIPT LANGUAGE="Javascript">alert("Vous devez remplir tous les champs!");	</SCRIPT> 	<?php
 	}
-}
-else if(isset($_GET['sortir'])){
+} else if(isset($_GET['sortir'])){
 session_destroy();
 header("location:index.php");
 }

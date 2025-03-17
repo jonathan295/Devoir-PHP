@@ -23,15 +23,15 @@ $matiere=mysqli_query($conn,"select matiere.codemat,nommat from enseignement,mat
   echo '<option value="'.$c['codemat'].'">'.$c['nommat'].'</option>';
   }?></select>
 </div>
-<div class="row justify-content-center m-4 flex-column align-items-center">
+<!-- <div class="row justify-content-center m-4 flex-column align-items-center"> -->
   <input type="hidden" name="nomclasse" value="<?php echo $nomcl; ?>">
-</div>
-<div class="row justify-content-center m-4 flex-column align-items-center">
+<!-- </div> -->
+<!-- <div class="row justify-content-center m-4 flex-column align-items-center"> -->
   <input type="hidden" name="promo" value="<?php echo $promo; ?>">
-</div>
-<div class="row justify-content-center m-4 flex-column align-items-center">
+<!-- </div> -->
+<!-- <div class="row justify-content-center m-4 flex-column align-items-center"> -->
   <input type="hidden" name="semestre" value="<?php echo $semestre; ?>">
-</div>
+<!-- </div> -->
 <div class="row justify-content-center m-4">
   <input class="btn btn-dark col-3" type="submit" value="Afficher les notes finals">
 </div>

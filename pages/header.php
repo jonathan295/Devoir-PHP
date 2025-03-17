@@ -15,16 +15,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	<!-- Option 1: Include in HTML -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 	<link href="<?php if ($_SERVER["PHP_SELF"]=="/gestion00/pages/form/connexion.php") {echo "/gestion00/style/styleformulaire.css";} ?>" rel="stylesheet">
-	<link rel="stylesheet" href="bootstrap-5.1.3/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="/gestion00/style/all.css">
 	<link rel="stylesheet" href="/gestion00/style/styleheader.css">
+	<link rel="stylesheet" href="/gestion00/style/add.css">
 	<title>Document</title>
 </head>
 <body>
-	<div class="container-fluid">
-		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<div class="container-fluid sticky-top">
+		<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
 			<div class="container-fluid">
 					<a class="navbar-brand" href="#">Navbar</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,13 +61,15 @@
 									</li>
 								<?php endif; ?>
 								
-								<?php if(!isset($_SESSION['prof'])): ?>
+								<?php if(isset($_SESSION['prof']) or isset($_SESSION["admin"])): ?>
 									<li class="nav-item"><a class="nav-link" href="/gestion00/gestion/Ajout_etudiant.php">Ajouter un etudiant</a></li>
 								<?php endif; ?>
 								<?php if(isset($_SESSION['etudiant'])): ?>
 									<li class="nav-item"><a class="nav-link" href="/gestion00/gestion/note_etudiant.php">Consulter les notes</a></li>
 								<?php endif; ?>
+								<?php if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])): ?>
 									<li class="nav-item"><a class="nav-link" href="/gestion00/gestion/chercher_eleve.php?cherche_eleve=true">Chercher un étudiant</a></li>
+								<?php endif; ?>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
@@ -74,12 +77,14 @@
 								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/afficher_prof.php">Liste des enseignants</a></li>
 								<?php if((isset($_SESSION['admin'])) or (isset($_SESSION['prof']))): ?>
-								    <?php if(!isset($_SESSION['prof'])): ?>
+								    <?php if(isset($_SESSION['admin'])): ?>
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/ajout_prof.php">Ajouter un enseignant</a></li>
 									<?php endif; ?>	
+									<?php if(isset($_SESSION['admin']) && isset($_SESSION["prof"])): ?>
 									<li class="nav-item">
         				                <a class="nav-link dropdown-item" href="/gestion00/gestion/chercher_prof.php?cherche_prof=true">Chercher un enseignant</a>
         				            </li>
+									<?php endif; ?>	
 								<?php endif; ?>
 								</ul>
 							</li>
@@ -87,7 +92,7 @@
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Classes</a>
 								<ul class="dropdown-menu">
 									<li class="nav-item">
-										<a class="nav-link dropdown-item" href="/gestion00/gestion/affiche_classe.php">Voir les classes</a>
+										<a class="nav-link dropdown-item" style="" href="/gestion00/gestion/affiche_classe.php">Voir les classes</a>
 									</li>
         				<?php if(!isset($_SESSION['admin'])): ?>
         				        </ul>
@@ -102,13 +107,15 @@
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Stages</a>
 								<ul class="dropdown-menu" >
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/afficher_stage.php">Voir les stages</a></li>
-								<?php if(isset($_SESSION['admin'])): ?>
+								<?php if(!isset($_SESSION['admin'])): ?>
+									<?php else: ?>
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/ajout_stage.php">Ajouter un stage</a></li>
 								<?php endif; ?>
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/chercher_stage.php?cherche_stage=true">Chercher un stage</a></li>
 								</ul>
 							</li>			
-						<?php if(isset($_SESSION['admin']) or isset($_SESSION['prof'])): ?>
+						<?php if(!isset($_SESSION['admin']) or !isset($_SESSION['prof'])): ?>
+							<?php else: ?>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conseil</a>
 								<ul class="dropdown-menu">
@@ -197,7 +204,7 @@
 						<?php endif; ?>	
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">Enseignement </a>
-								<ul class="dropdown-menu" >
+								<ul class="dropdown-menu" style="right: 0;">
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/afficher_enseign.php">Voir les enseignement</a></li>
 								<?php if(isset($_SESSION['admin'])): /*!(isset($_SESSION['prof'])) and !(isset($_SESSION['public'])) and !(isset($_SESSION['etudiant']))*/?>
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/ajout_enseignement.php">Ajouter un enseignement</a></li>
@@ -213,7 +220,7 @@
 								</div>
 								<ul class="dropdown-menu" style="right: 0;">
 									<?php if (isset($_SESSION["type_conn"])): ?>
-										<li class="nav-item"><a class="nav-link" href="">Profil</a></li>
+										<!-- <li class="nav-item"><a class="nav-link" href="">Profil</a></li> -->
 										<li class="nav-item"><a class="nav-link" href="/gestion00/pages/form/deconnexion.php">Deconnexion</a></li>
 									<?php else : ?>
 										<li class="nav-item">

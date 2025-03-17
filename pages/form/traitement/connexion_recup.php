@@ -25,7 +25,7 @@ if ($_SERVER["PHP_SELF"] == "/gestion00/pages/form/traitement/connexion_recup.ph
             if (empty($pseudo)){
                 $_SESSION["pseudo_err_conn"] = "Veuillez entrer un pseudo";
             }
-
+            
             header("location: /gestion00/pages/form/connexion.php");
         } else {
             $req = "SELECT id, num FROM login WHERE pseudo = ? && passe = ?";
@@ -37,6 +37,7 @@ if ($_SERVER["PHP_SELF"] == "/gestion00/pages/form/traitement/connexion_recup.ph
             print_r($id);
             
             if ($id >= 1) {
+                echo "oui 1";
                 $_SESSION["type_conn"] = $_POST["type"];
                 $connexion = $_SESSION["connexion_yes"] = "YES";
                 echo $_SESSION["type_conn"];
@@ -50,6 +51,8 @@ if ($_SERVER["PHP_SELF"] == "/gestion00/pages/form/traitement/connexion_recup.ph
                     else if($_SESSION['type_conn']=="admin"){
                         $_SESSION['admin']=$num;
                     }
+
+                    echo $id;
                 
 
                 header("location: ../../home.php");

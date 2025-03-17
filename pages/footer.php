@@ -1,7 +1,7 @@
-<div class=""><br/><center>&reg; 2010 Ecole supérieure de technologie de Berrechid. Gestion de scolarité</center></div>
+<footer>&reg; 2010 Ecole supérieure de technologie de Berrechid. Gestion de scolarité</footer>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
+<?php echo"1"; ?>
 <script>
     const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#inputPassword4');

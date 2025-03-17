@@ -46,35 +46,35 @@ $data=mysqli_query($conn,"select distinct promotion from classe order by promoti
 <form action="Ajout_etudiant.php" method="POST" class="form">
 	<h3 class="text-center">Ajouter un Etudiant</h3>  
 	<div class="row justify-content-center m-4">
-		<label class="col-4" for="">Nom étudiant:</label class="col-4">
+		<label class="col-2" for="">Nom étudiant:</label class="col-2">
 		<input class="col-4" type="text" name="nom">
 	</div>
 	<div class="row justify-content-center m-4">
-		<label class="col-4" for="">Prénom:</label class="col-4">
+		<label class="col-2" for="">Prénom:</label class="col-2">
 		<input class="col-4" type="text" name="prenom">
 	</div>
 	<div class="row justify-content-center m-4">
-		<label class="col-4" for="">Date de naissance:</label class="col-4">
-		<input class="col-4" type="text" name="date" class="calendrier" >
+		<label class="col-2" for="">Date de naissance:</label class="col-2">
+		<input class="col-4 calendrier" type="text" name="date">
 	</div>
 	<div class="row justify-content-center m-4">
-		<label class="col-4" for="">Adresse:</label class="col-4">
+		<label class="col-2" for="">Adresse:</label class="col-2">
 		<input class="col-4" type="text" name="adresse">
 	</div>
 	<div class="row justify-content-center m-4">
-		<label class="col-4" for="">Telephone:</label class="col-4">
+		<label class="col-2" for="">Telephone:</label class="col-2">
 		<input class="col-4" type="text" name="phone">
 	</div>
 	<div class="row justify-content-center m-4">
-		<label class="col-4" for="">pseudo:</label class="col-4">
+		<label class="col-2" for="">pseudo:</label class="col-2">
 		<input class="col-4" type="text" name="pseudo">
 	</div>
 	<div class="row justify-content-center m-4">
-		<label class="col-4" for="">mot de passe:</label class="col-4">
+		<label class="col-2" for="">mot de passe:</label class="col-2">
 		<input class="col-4" type="password" name="mdp">
 	</div>
 	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<label class="col-4" for="">Classe:</label class="col-4">
+		<label class="col-2" for="">Classe:</label class="col-2">
 		<select class="col-4" name="nomcl"> 
 		<?php 
 		$retour=mysqli_query($conn,"select distinct nom from classe"); // afficher les classes
@@ -84,7 +84,7 @@ $data=mysqli_query($conn,"select distinct promotion from classe order by promoti
 		</select>
 	</div>
 	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<label class="col-4" for="">Promotion:</label class="col-4">
+		<label class="col-2" for="">Promotion:</label class="col-2">
 		<select class="col-4" name="promotion"> 
 		<?php while($a=mysqli_fetch_array($data)){
 		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';

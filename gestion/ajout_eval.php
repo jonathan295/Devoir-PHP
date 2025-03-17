@@ -136,7 +136,7 @@ $data=mysqli_query($conn, "select numel,nomel,prenomel from eleve where codecl=(
    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
       <input type="hidden" name="numdev" value="<?php echo $numdev; ?>">
    </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+   <div class="row justify-content-center m-4 text-center">
       <input class="btn btn-dark col-2" type="submit" value="Ajouter">
    </div>
 </form>
@@ -167,7 +167,7 @@ $data=mysqli_query($conn, "select distinct promotion from classe order by promot
       <select class="col-2" name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
       </select>
    </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+   <div class="row justify-content-center m-4 text-center">
       <input class="btn btn-dark col-2" type="submit" value="Afficher les matieres">
    </div>
 </form>

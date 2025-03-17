@@ -12,7 +12,7 @@ include('cadre.php');
 			<label class="col-4" for="">Titre du diplôme</label>
 			<input class="col-4" type="text" name="ajout_titre">
 		</div>
-		<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+		<div class="row justify-content-center m-4 text-center">
 			<input class="btn btn-dark col-2" class="btn btn-dark col-2" type="submit" value="Ajouter">
 		</div>
 	</form>
@@ -42,7 +42,7 @@ $nomclasse=mysqli_query($conn, "select distinct nom from classe");
 		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
 		}?></select>
 	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+	<div class="row justify-content-center m-4 text-center">
 		<input class="btn btn-dark col-2" class="btn btn-dark col-2" type="submit" value="Suivant">
 	</div>
 </form>
@@ -92,7 +92,7 @@ $titre=mysqli_query($conn, "select numdip,titre_dip from diplome");
 		<label class="col-4" for="">Année d'obtention</label>
 		<input class="col-4" type="text" name="ann_obt">
 	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+	<div class="row justify-content-center m-4 text-center">
 		<input class="btn btn-dark col-2" class="btn btn-dark col-2" type="submit" value="Ajouter">
 	</div>
 </form>
