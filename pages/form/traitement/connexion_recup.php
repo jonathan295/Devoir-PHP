@@ -57,6 +57,9 @@ if ($_SERVER["PHP_SELF"] == "/gestion00/pages/form/traitement/connexion_recup.ph
 
                 header("location: ../../home.php");
 
+            } else {
+                $_SESSION["type_err_conn"] = "Vérifier vos entrées, il y a une erreur";
+                header("location: /gestion00/pages/form/connexion.php");
             }
         }
     }

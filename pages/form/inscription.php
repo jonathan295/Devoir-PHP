@@ -5,6 +5,7 @@ include_once "../header.php";
 ?>
 
 <div class="container">
+      <h3 class="fw-bolder">Inscription</h3>
       <form action="/gestion00/pages/form/traitement/inscription_recup.php" class="row g-3" method="POST">
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Nom:* </label>

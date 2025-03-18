@@ -84,3 +84,4 @@ echo '<br/><br/><a href="afficher_devoir.php">Revenir à la page à l\'affichage
 }
 ?>
 </div>
+<?php include ("../pages/footer.php"); ?>

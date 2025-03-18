@@ -73,29 +73,30 @@ $data=mysqli_query($conn,"select distinct promotion from classe order by promoti
 		<label class="col-2" for="">mot de passe:</label class="col-2">
 		<input class="col-4" type="password" name="mdp">
 	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<label class="col-2" for="">Classe:</label class="col-2">
-		<select class="col-4" name="nomcl"> 
-		<?php 
-		$retour=mysqli_query($conn,"select distinct nom from classe"); // afficher les classes
-		while($a=mysqli_fetch_array($retour)){
-		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-		}?>
-		</select>
-	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<label class="col-2" for="">Promotion:</label class="col-2">
-		<select class="col-4" name="promotion"> 
-		<?php while($a=mysqli_fetch_array($data)){
-		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-		}?>
-		</select>
+	<div class="row justify-content-center">
+		<div class="col-4 justify-content-center m-4 flex-column align-items-center border-white text-center">
+			<label class="col-4" for="">Classe:</label class="col-2">
+			<select class="col-4" name="nomcl"> 
+			<?php 
+			$retour=mysqli_query($conn,"select distinct nom from classe"); // afficher les classes
+			while($a=mysqli_fetch_array($retour)){
+			echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+			}?>
+			</select>
+		</div>
+		<div class="col-4 justify-content-center m-4 flex-column align-items-center border-white text-center">
+			<label class="col-4" for="">Promotion:</label class="col-2">
+			<select class="col-4" name="promotion"> 
+			<?php while($a=mysqli_fetch_array($data)){
+			echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+			}?>
+			</select>
+		</div>
 	</div>
 	<div class="row justify-content-center m-4">
-		<input class="btn btn-dark col-4" class="col-2" type="submit" value="Ajouter">
+		<input class="btn btn-dark col-2" class="col-2" type="submit" value="Ajouter">
 	</div>
 </form>
 
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

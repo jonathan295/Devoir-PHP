@@ -40,6 +40,5 @@ echo '<td>'.$a['nomcl'].'</td><td>'.$a['promotion'].'</td><td>'.$a['nomprof'].'<
 <?php
 echo '<br/><br/><a class="btn btn-dark" href="index.php">Revenir à la page précédente !</a>';
 ?>
-</center>
 </div>
-</html>
+<?php include ("../pages/footer.php"); ?>

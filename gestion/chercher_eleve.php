@@ -20,22 +20,24 @@ $data=mysqli_query($conn,"select distinct promotion from classe order by promoti
 		<label class="col-4" for="">Prenom:</label class="col-4">
 		<input class="col-4" type="text" name="prenomel">
 	</div>
-	<div class="row justify-content-center m-4 flex-column text-center align-items-center">
-		<label class="col-5" for="">vous pouvez préciser la promotion si vous voulez:</label class="col-4">
-		<select class="col-4" name="promotion"> 
-		<option value="">Choisir la promotion</option>
-		<?php while($a=mysqli_fetch_array($data)){
-		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-		}?>
-		</select>
-	</div>
-	<div class="row justify-content-center m-4 flex-column text-center align-items-center">
-		<label class="col-5" for="">Vous pouvez préciser la classe si vous voulez:</label class="col-4">
-		<select class="col-4" name="nomcl"> 
-		<option value="">Choisir la classe</option>
-		<?php while($a=mysqli_fetch_array($retour)){
-		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-		}?></select>
+	<div class="row justify-content-center">
+		<div class="col-5 justify-content-center m-4 flex-column text-center align-items-center">
+			<label class="col-12" for="">vous pouvez préciser la promotion si vous voulez:</label class="col-4">
+			<select class="col-12" name="promotion"> 
+			<option value="">Choisir la promotion</option>
+			<?php while($a=mysqli_fetch_array($data)){
+			echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+			}?>
+			</select>
+		</div>
+		<div class="col-5 justify-content-center m-4 flex-column text-center align-items-center">
+			<label class="col-12" for="">Vous pouvez préciser la classe si vous voulez:</label class="col-4">
+			<select class="col-12" name="nomcl"> 
+			<option value="">Choisir la classe</option>
+			<?php while($a=mysqli_fetch_array($retour)){
+			echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+			}?></select>
+		</div>
 	</div>
 	<div class="row justify-content-center m-4">
 		<input class="btn btn-dark col-2" class="btn btn-dark col-2" type="submit" value="Rechercher">
@@ -86,7 +88,4 @@ else if(isset($_POST['nomel'])){
 	?>
 <?php endif; ?>
 </div>
-</pre>
-</center>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

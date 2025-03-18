@@ -71,4 +71,4 @@ $nomclasse=mysqli_query($conn, "select distinct nom from classe");
 </form>
 <?php } ?>
 </div>
-</html>
+<?php include ("../pages/footer.php"); ?>

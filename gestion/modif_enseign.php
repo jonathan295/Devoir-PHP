@@ -93,5 +93,5 @@ mysqli_query($conn, "delete from enseignement where id='$id'");
 echo '<a href="/gestion00/index.php">Revenir à la page principale</a>'; //on revient � la page princippale car on n'a plus l'id dont on affiche la matiere dans la modification
 }
 ?>
-</pre>
 </div>
+<?php include ("../pages/footer.php"); ?>

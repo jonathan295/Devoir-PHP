@@ -22,7 +22,7 @@ $data=mysqli_query($conn, "select prof.nom,prenom,nommat,classe.nom as nomcl,pro
  <tbody>
 <?php
 while($a=mysqli_fetch_array($data)){
-echo '<tr><td>'.$a['nom'].'</td><td>'.$a['prenom'].'</td><td>'.$a['nommat'].'</td><td>'.$a['nomcl'].'</td><td>'.$a['promotion'].'</td><td>'.$a['numsem'].'</td></tr><tr></tr>';
+echo '<tr><td>'.$a['nom'].'</td><td>'.$a['prenom'].'</td><td>'.$a['nommat'].'</td><td>'.$a['nomcl'].'</td><td>'.$a['promotion'].'</td><td>'.$a['numsem'].'</td></tr>';
 }
 ?>
 <tbody>

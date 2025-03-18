@@ -35,19 +35,22 @@ else{
 <SCRIPT LANGUAGE="Javascript">alert("Vous devez remplir tous les champs!");</SCRIPT>
 <?php
 }
-echo '<br/><a href="ajout_prof.php">Revenir à la page précédente !</a>';
+echo '<div class="row justify-content-center"><a class="btn btn-dark col-4" href="ajout_prof.php">Revenir à la page précédente !</a></div>';
 }
 else {
  ?>
  <form action="ajout_prof.php" method="POST" class="form">
-	<div class="row text-center justify-content-center m-4 flex-column align-items-center">
-		<label class="col-6" for="">Nom:</label class="col-6">
-		<input class="col-6" type="text" name="nom">
+	<div class="row">
+		<div class="col text-center justify-content-center m-4 flex-column align-items-center">
+			<label class="col-6" for="">Nom:</label class="col-6">
+			<input class="col-6 p-1" type="text" name="nom">
+		</div>
+		<div class="col text-center justify-content-center m-4 flex-column align-items-center">
+			<label class="col-6" for="">Prenom:</label class="col-6">
+			<input class="col-6 p-1" type="text" name="prenom">
+		</div>
 	</div>
-	<div class="row text-center justify-content-center m-4 flex-column align-items-center">
-		<label class="col-6" for="">Prenom:</label class="col-6">
-		<input class="col-6" type="text" name="prenom">
-	</div>
+	<div class="row">
 	<div class="row text-center justify-content-center m-4 flex-column align-items-center">
 		<label class="col-6" for="">Adresse:</label class="col-6">
 		<textarea class="col-6" name="adresse"> </textarea>
@@ -55,6 +58,7 @@ else {
 	<div class="row text-center justify-content-center m-4 flex-column align-items-center">
 		<label class="col-6" for="">Telephone:</label class="col-6">
 		<input class="col-6" type="text" name="telephone">
+	</div>
 	</div>
 	<div class="row text-center justify-content-center m-4 flex-column align-items-center">
 		<label class="col-6" for="">Pseudo:</label class="col-6">
@@ -64,13 +68,12 @@ else {
 		<label class="col-6" for="">Password:</label class="col-6">
 		<input class="col-6" type="password" name="passe">
 	</div>
-	<div class="row text-center justify-content-center m-4 flex-column align-items-center">
+	<div class="row text-center justify-content-center m-4">
 		<input class="btn btn-dark col-2" type="submit" value="Ajouter">
 	</div>
 </form>
 <?php
 }
 ?>
-</pre></center>
 </div>
-</html>
+<?php include ("../pages/footer.php"); ?>

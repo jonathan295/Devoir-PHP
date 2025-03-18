@@ -105,7 +105,5 @@ $retour=mysqli_query($conn,"select distinct nom from classe"); // afficher les c
   </div>
 </form>
 <?php } ?>
-</pre>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

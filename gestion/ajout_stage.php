@@ -52,7 +52,7 @@ else if(!isset($_POST['nomcl']) and !isset($_GET['modif_stage'])){
  ?>
 <form action="ajout_stage.php" method="POST" class="form">
 	<h3 class="text-center">Veuillez choisir la classe et la promotion:</h3>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center justify-content-center m-4 flex-column align-items-center text-center">
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
 		<lablel class="col-4" for="">Promotion:</lablel class="col-4">
 		<select class="col-4" name="promotion"> 
 		<?php while($a=mysqli_fetch_array($data)){
@@ -60,7 +60,7 @@ else if(!isset($_POST['nomcl']) and !isset($_GET['modif_stage'])){
 		}?>
 		</select>
 	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center justify-content-center m-4 flex-column align-items-center text-center">
+	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
 		<lablel class="col-4" for="">Classe:</lablel class="col-4">
 		<select class="col-4" name="nomcl"> 
 		<?php while($a=mysqli_fetch_array($retour)){
@@ -68,7 +68,7 @@ else if(!isset($_POST['nomcl']) and !isset($_GET['modif_stage'])){
 		}?>
 		</select>
 	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center justify-content-center m-4 flex-column align-items-center text-center">
+	<div class="row justify-content-center m-4 text-center">
 		<input class="col-2 btn btn-dark" type="submit" value="Suivant">
 	</div>
 </form>
@@ -108,18 +108,20 @@ $data=mysqli_query($conn,"select numel,nomel,prenomel from eleve,classe where cl
 		<lablel class="col-4" for="">Lieu de stage</lablel class="col-4">
 		<input class="col-8" type="text" name="lieu" value="<?php echo $lieu; ?>">
 	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<lablel class="col-4" for="">Date de debut</lablel class="col-4">
-		<input class="col-2 calendrier" type="text" name="date_debut" value="<?php echo $date_debut; ?>">
+	<div class="row justify-content-center">
+		<div class="col-4 justify-content-center m-4 flex-column align-items-center text-center">
+			<lablel class="col-4" for="">Date de debut</lablel class="col-4">
+			<input class="col-4 calendrier" type="text" name="date_debut" value="<?php echo $date_debut; ?>">
+		</div>
+		<div class="col-4 justify-content-center m-4 flex-column align-items-center text-center">
+			<lablel class="col-4" for="">Date de fin</lablel class="col-4">
+			<input class="col-4 calendrier" type="text" name="date_fin" value="<?php echo $date_fin; ?>">
+		</div>
 	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<lablel class="col-4" for="">Date de fin</lablel class="col-4">
-		<input class="col-2 calendrier" type="text" name="date_fin" value="<?php echo $date_fin; ?>">
-	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
+	<div class="row justify-content-center m-4 text-center">
 		<input class="btn btn-dark col-2" type="sublit" value="Ajouter">
 	</div>
 </form>
 <?php } ?>
 </div>
-</html>
+<?php include ("../pages/footer.php"); ?>

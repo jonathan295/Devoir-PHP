@@ -90,6 +90,5 @@ echo '<tr><td>'.$a['nomel'].'</td><td>'.$a['prenomel'].'</td><td>'.$a['nom'].'</
 ?>
 <a class="btn btn-dark" href="afficher_bulettin.php">Revenir à la page precedente !</a>
 </div>
-<body>
-</html>
+<?php include ("../pages/footer.php"); ?>
 

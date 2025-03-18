@@ -24,12 +24,11 @@
 	<title>Document</title>
 </head>
 <body>
-	<div class="container-fluid sticky-top">
+	<div class="container-fluid sticky-top with-bg mb-4" id="navContainer">
 		<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
 			<div class="container-fluid">
-					<a class="navbar-brand" href="#">Navbar</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+					<a class="navbar-brand" href="#">DYLAN</a>
+					<button class="border-white navbar-toggler p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="fw-bold text-white">Menu</span></button>
 					</button>
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav align-items-center">
@@ -114,8 +113,7 @@
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/chercher_stage.php?cherche_stage=true">Chercher un stage</a></li>
 								</ul>
 							</li>			
-						<?php if(!isset($_SESSION['admin']) or !isset($_SESSION['prof'])): ?>
-							<?php else: ?>
+						<?php if(isset($_SESSION['admin']) or isset($_SESSION['prof'])): ?>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Conseil</a>
 								<ul class="dropdown-menu">
@@ -190,7 +188,7 @@
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Evalutation</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/ajout_eval.php">Ajouter une evaluation</a></li>
+									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/ajout_eval.php?ajout_eval">Ajouter une evaluation</a></li>
 									<li class="nav-item"><a class="nav-link dropdown-item" href="/gestion00/gestion/afficher_evaluation.php">Voir les evalutations</a></li>
 								</ul>
 							</li>	
@@ -212,11 +210,11 @@
 								</ul>
 							</li>				
         				    <li class="nav-item dropdown">
-								<div class="nav-item d-flex align-items-center">
+								<div class="nav-item d-flex align-items-center nav-item">
 									<div class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:50px;">
 										<img src="/gestion00/image/user_icone.png" alt="user" style="object-fit: contain; width: 100%; height: 100%;">
 									</div>
-									<p class="text-uppercase" style="margin:0;"><?php if (isset($_SESSION["type_conn"])) {echo $_SESSION["type_conn"];} ?></p>
+									<a href="#" class="text-uppercase text-white nav-link" style="margin:0;"><?php if (isset($_SESSION["type_conn"])) {echo $_SESSION["type_conn"];} ?></a>
 								</div>
 								<ul class="dropdown-menu" style="right: 0;">
 									<?php if (isset($_SESSION["type_conn"])): ?>

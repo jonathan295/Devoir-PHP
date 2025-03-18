@@ -89,3 +89,4 @@ echo '<a class="btn btn-dark" href="index.php?">Revenir à la page principale !<
 }
 ?>
 </div>
+<?php include ("../pages/footer.php"); ?>

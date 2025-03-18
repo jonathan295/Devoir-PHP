@@ -60,7 +60,7 @@ while($a=mysqli_fetch_array($donnee)){
 ?>
 <tr><?php if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])){
 echo '<td><a href="modif_eleve.php?modif_el='.$a['numel'].'">modifier</a></td><td><a href="modif_eleve.php?supp_el='.$a['numel'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\ntous les enregistrements en relation avec cette entrée seront perdus\'));">supprimer</a></td>';}
-echo '<td>'.$a['nomel'].'</td><td>'.$a['prenomel'].'</td><td>'.$a['date_naissance'].'</td><td>'.$a['adresse'].'</td><td>'.$a['telephone'].'</td><td>'.$a['nom'].'</td><td>'.$a['promotion'].'</td><td><a href="listeEtudiant.php?voir_ensei='.$a['numel'].'">Voir ses enseignant</a></td></tr>';
+echo '<td>'.$a['nomel'].'</td><td>'.$a['prenomel'].'</td><td>'.$a['date_naissance'].'</td><td>'.$a['adresse'].'</td><td>'.$a['telephone'].'</td><td>'.$a['nom'].'</td><td>'.$a['promotion'].'</td><td><a href="listeEtudiant.php?voir_ensei='.$a['numel'].'" class="d-flex justify-content-center"><img src="/gestion00/image/oeil.png" class="img-fluid" style="width: 20px;" alt="voir enseignant"></a></td></tr>';
 }
 ?>
 <tbody>
@@ -70,7 +70,7 @@ echo '<a class="btn btn-dark" href="listeEtudiant.php?nomcl='.$nomcl.'">Revenir 
 }
 if(isset($_GET['voir_ensei'])){
 $id=$_GET['voir_ensei'];
-$data=mysqli_query($conn, "select prof.nom,nom,nomel,nomel,classe.nom as nomcl,numsem,nommat,prof.adresse,promotion from prof,matiere,classe,eleve,enseignement where prof.numprof=enseignement.numprof and enseignement.codemat=matiere.codemat and eleve.codecl=classe.codecl and classe.codecl=enseignement.codecl and numel='$id'");
+$data=mysqli_query($conn, "select prof.nom,prenom,nomel,nomel,classe.nom as nomcl,numsem,nommat,prof.adresse,promotion from prof,matiere,classe,eleve,enseignement where prof.numprof=enseignement.numprof and enseignement.codemat=matiere.codemat and eleve.codecl=classe.codecl and classe.codecl=enseignement.codecl and numel='$id'");
 ?>
 <h2>Les enseignants de l'étudiant choisis : </h2><br/>
 <table class="table table-striped table-hover table-hover" id="rounded-corner">
@@ -96,9 +96,9 @@ echo '<td>'.$a['nomel'].'</td><td>'.$a['nomel'].'</td><td>'.$a['nomcl'].'</td><t
 }
 ?>
 <tbody>
-</table class="table table-striped table-hover table-hover"> 
+</table> 
 <?php
 }
 ?>
-
 </div>
+<?php include ("../pages/footer.php"); ?>

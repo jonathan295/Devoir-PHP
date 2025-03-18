@@ -83,4 +83,4 @@ echo '<a class="btn btn-dark" href="/gestion00/index.php?">Revenir à la page pr
 }
 ?>
 </body>
-</html>
+<?php include ("../pages/footer.php"); ?>

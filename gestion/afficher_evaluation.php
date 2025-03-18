@@ -92,7 +92,7 @@ $donnee=mysqli_query($conn, "select numeval,date_dev,nommat,nom,nomel,prenomel,n
 while($a=mysqli_fetch_array($donnee)){
 ?> <tr> <?php
 if(isset($_SESSION['admin']) or isset($_SESSION['prof'])){ 
-echo '<td><a href="modif_eval.php?modif_eval='.$a['numeval'].'">modifier</a></td><td><a href="modif_eval.php?supp_eval='.$a['numeval'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));">supprimer</a></td>';}
+echo '<td><a href="modif_eval.php?modif_eval='.$a['numeval'].'"><img style="width: 20px;" src="/gestion00/image/editer.png" alt="modifier"></a></td><td><a href="modif_eval.php?supp_eval='.$a['numeval'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));"><img style="width: 20px;" src="/gestion00/image/supprimer.png" alt="supprimer"></a></td>';}
 echo '<td>'.$a['nomel'].'</td><td>'.$a['prenomel'].'</td><td>'.$a['nom'].'</td><td>'.$a['promotion'].'</td><td>'.$a['nommat'].'</td><td>'.$a['date_dev'].'</td><td>'.$a['coeficient'].'</td><td>S'.$a['numsem'].'</td><td>'.$a['n_devoir'].'</td><td>'.$a['note'].'</td></tr>';
 }
 ?>
@@ -132,5 +132,4 @@ $retour=mysqli_query($conn, "select distinct nom from classe");
 </form>
 <?php } ?>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

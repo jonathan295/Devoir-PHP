@@ -17,5 +17,5 @@ echo '<a class="btn btn-dark" href="index.php">Revenir à la page d\'accueill !<
 ?>
 </div>
 </div>
-</html>
+<?php include ("../pages/footer.php"); ?>
 

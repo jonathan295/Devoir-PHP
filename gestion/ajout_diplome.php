@@ -28,19 +28,21 @@ $nomclasse=mysqli_query($conn, "select distinct nom from classe");
 	</div>
 <form action="ajout_diplome.php" method="POST" class="form">
 	<h3 class="text-center">Veuillez choisir la classe et la promotion</h3>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<label class="col-4" for="">Promotion</label>
-		<select class="col-2" name="promotion"> 
-		<?php while($a=mysqli_fetch_array($data)){
-		echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-		}?></select>
-	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
-		<label class="col-4" for="">Classe</label>
-		<select class="col-2" name="nomcl"> 
-		<?php while($a=mysqli_fetch_array($nomclasse)){
-		echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
-		}?></select>
+	<div class="row justify-content-center">
+		<div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+			<label class="col-4" for="">Promotion</label>
+			<select class="col-2" name="promotion"> 
+			<?php while($a=mysqli_fetch_array($data)){
+			echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+			}?></select>
+		</div>
+		<div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+			<label class="col-4" for="">Classe</label>
+			<select class="col-2" name="nomcl"> 
+			<?php while($a=mysqli_fetch_array($nomclasse)){
+			echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';
+			}?></select>
+		</div>
 	</div>
 	<div class="row justify-content-center m-4 text-center">
 		<input class="btn btn-dark col-2" class="btn btn-dark col-2" type="submit" value="Suivant">
@@ -132,8 +134,16 @@ else if(isset($_POST['ajout_titre'])){
 	mysqli_query($conn, "insert into diplome(titre_dip) values('$titre')");
 	?>	<SCRIPT LANGUAGE="Javascript">alert("Ajout avec succès!");</SCRIPT> 	<?php
 	}
-	echo '<a class="btn btn-dark" href="ajout_diplome.php?ajout_type">Revenir à la page précédente !</a>';
+	echo '<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="container d-flex align-items-center justify-content-center">
+						<img src="titre_img/ajout_diplome.png" class="position_titre">
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center"><a class="btn btn-dark col-4" href="ajout_diplome.php?ajout_type">Revenir à la page précédente !</a></div>
+		</div>';
 }
-
-
 ?>
+<?php include ("../pages/footer.php"); ?>

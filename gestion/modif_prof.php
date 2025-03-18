@@ -56,8 +56,8 @@ if(isset($_GET['supp_prof'])){
 $id=$_GET['supp_prof'];
 mysqli_query($conn,"delete from prof where numprof='$id'");
 ?> <SCRIPT LANGUAGE="Javascript">	alert("Supprimé avec succès!"); </SCRIPT> <?php
-echo '<br/><br/><a href="index.php?">Revenir à la page principale !</a>';
+echo '<div class="row justify-content-center"><a class="btn btn-dark col-4" href="/gestion00/index.php?">Revenir à la page principale !</a></div>';
 }
 ?>
-</pre>
 </div>
+<?php include ("../pages/footer.php"); ?>

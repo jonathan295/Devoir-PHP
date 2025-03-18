@@ -13,13 +13,15 @@ $data=mysqli_query($conn,"select distinct promotion from classe order by promoti
 ?>
 
 <form action="chercher_stage.php" method="post" class="form container">
-	<div class="row justify-content-center m-4 flex-column align-items-center">
-		<label class="col-6" for="">Nom:</label>
-		<input class="col-6" type="text" name="nomel">
-	</div>
-	<div class="row justify-content-center m-4 flex-column align-items-center">
-		<label class="col-6" for="">Prenom:</label>
-		<input class="col-6" type="text" name="prenomel">
+	<div class="row justify-content-evenly">
+		<div class="col-5 justify-content-center flex-column align-items-center text-center">
+			<label class="col-2" for="">Nom:</label>
+			<input class="col-8" type="text" name="nomel">
+		</div>
+		<div class="col-5 justify-content-center flex-column align-items-center text-center">
+			<label class="col-2" for="">Prenom:</label>
+			<input class="col-8" type="text" name="prenomel">
+		</div>
 	</div>
 	<div class="row justify-content-center m-4 flex-column align-items-center text-center">
 		<label class="col-8" for="">vous pouvez préciser la promotion si vous voulez:</label>
@@ -79,14 +81,11 @@ else if(isset($_POST['nomel'])){
 	}
 	?>
 	</tbody>
-	</table></center>
+	</table>
 	<a class="btn btn-dark" href="chercher_stage.php?cherche_stage=true">Revenir à la page précédente !</a>
 	<?php
 	}
 ?>
 <?php endif; ?>
-</pre>
 </div>
-</center>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

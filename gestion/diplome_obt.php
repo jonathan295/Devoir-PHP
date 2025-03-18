@@ -48,18 +48,20 @@ $retour=mysqli_query($conn, "select distinct nom from classe");
 ?>
 <form method="post" action="diplome_obt.php" class="form">
     <h3 class="text-center">Veuillez choisir la classe et la promotion</h3>
-    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-        <label class="col-4" for="">Promotion</label>
-        <select class="col-2" name="promotion"> 
-        <?php while($a=mysqli_fetch_array($data)){echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';}?>
-        </select>
+    <div class="row justify-content-center">
+      <div class="col-4 justify-content-center m-4 flex-column align-items-center text-center">
+          <label class="col-4" for="">Promotion</label>
+          <select class="col-4" name="promotion"> 
+          <?php while($a=mysqli_fetch_array($data)){echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';}?>
+          </select>
+      </div>
+      <div class="col-4 justify-content-center m-4 flex-column align-items-center text-center">
+          <label class="col-4" for="">Classe</label>
+          <select class="col-4" name="nomcl"> 
+          <?php while($a=mysqli_fetch_array($retour)){echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';}?></select>
+      </div>
     </div>
-    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-        <label class="col-4" for="">Classe</label>
-        <select class="col-2" name="nomcl"> 
-        <?php while($a=mysqli_fetch_array($retour)){echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>';}?></select>
-    </div>
-    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+    <div class="row justify-content-center m-4 text-center">
         <input class="btn btn-dark col-2" type="submit" value="Afficher les stages">
     </div>
 </form>
@@ -67,5 +69,4 @@ $retour=mysqli_query($conn, "select distinct nom from classe");
 <?php }
 ?>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

@@ -45,32 +45,31 @@ $data=mysqli_query($conn, "select distinct promotion from classe order by promot
 $retour=mysqli_query($conn, "select distinct nom from classe"); // afficher les classes
 ?>
 <form method="post" action="ajout_conseil.php" class="form">
-    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+    <div class="row justify-content-center m-4 text-center">
         <h3 class="text-center">Veuillez choisir le Semestre, la promotion et la classe</h3>
     </div>
     <div class="row justify-content-center m-4 flex-column align-items-center text-center">
         <label for="">Promotion</label>
-        <select class="col-2" name="promotion"> 
+        <select class="col-4" name="promotion"> 
             <?php while($a=mysqli_fetch_array($data)){echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';}?>
         </select>
     </div>
     <div class="row justify-content-center m-4 flex-column align-items-center text-center">
         <label for="">Classe</label>
-        <select class="col-2" name="nomcl"> 
+        <select class="col-4" name="nomcl"> 
             <?php while($a=mysqli_fetch_array($retour)){echo '<option value="'.$a['nom'].'">'.$a['nom'].'</option>'; }?>
         </select>
     </div>
     <div class="row justify-content-center m-4 flex-column align-items-center text-center">
         <label for="">Semestre</label>
-        <select class="col-2" name="radiosem">
+        <select class="col-4" name="radiosem">
             <?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
         </select>
     </div>
-    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-        <input class="col-2 btn btn-dark" type="submit" value="Valider le conseil">
+    <div class="row justify-content-center m-4 text-center">
+        <input class="col-4 btn btn-dark" type="submit" value="Valider le conseil">
     </div>
 </form>
 <?php } ?>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

@@ -65,7 +65,7 @@ else{ ?>
         <select class="col-4" name="numsem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
         </select>
     </div>
-    <div class="row justify-content-center m-4 flex-column align-items-center">
+    <div class="row justify-content-center m-4">
         <input class="btn btn-dark col-3" type="submit" value="Afficher les stages">
     </div>
 </form>
@@ -73,5 +73,4 @@ else{ ?>
 ?>
 <br/><br/><a class="btn btn-dark" href="affiche_conseil.php">Revenir à la page précédente !</a>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

@@ -1,5 +1,5 @@
 body{
-    background: url("/gestion00/image/bgbody.jpg");
+    /* background: url("/gestion00/image/bgbody.jpg"); */
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
@@ -8,23 +8,29 @@ body{
 }
 
 *{
-    color: white;
+    color: black;
 }
 
 footer{
-    position: absolute;
-    bottom: 0;
+    /* position: absolute; */
+    /* bottom: 0; */
     color: white;
     text-align: center;
     width: 100%;
+    background-color: black;
 }
 
-/* nav{
-    position: fixed;
-    top: 0;
-} */
+.footer-bottom{
+    background-color: rgba(128, 128, 128, 0.116);
+}
 
-nav, .dropdown-menu{
+.with-bg{
+    background: url("/gestion00/image/entete.png");
+    height: 210px;
+    background-size: cover;
+}
+
+.dropdown-menu{
     background: rgba(0, 0, 0, 0.781);
 }
 
@@ -56,16 +62,17 @@ select{
 }
 
 .flex-column{
-  border: 1px solid;
-  white-space: collapse;
-  padding: 2%;
-  background: #ffffff1f;
+    border: none;
+    white-space: collapse;
+    padding: 2%;
+    /* background: #1e1e1e; */
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.295);
 }
 
 .table{
-    --bs-table-bg: #323338;
-    --bs-table-accent-bg: #37383d;
-    --bs-table-striped-color: #fff;
+    --bs-table-bg: #0000;
+    --bs-table-accent-bg: #ecf0f1;
+    --bs-table-striped-color: #000;
     --bs-table-striped-bg: rgba(255, 255, 255, 0.18);
     --bs-table-active-color: #212529;
     --bs-table-active-bg: rgba(0, 0, 0, 0.1);
@@ -80,13 +87,68 @@ input{
     color: black;
     border-radius: 50px;
     border: 2px solid white;
+    background: #80808073;
+    backdrop-filter: blur(10px);
 }
 textarea{
     color: black;
     border: 2px solid white;
+    background: #80808073;
 }
 
 .calendar{
     color: black;
     background-color: grey;
+}
+
+.navbar-toggler{
+    display: none;
+}
+
+/* Styles pour les écrans de moins de 768px */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .navbar-toggler{
+        display: block;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .navbar{
+        background-color: black;
+    }
+
+    .with-bg{
+        background: none;
+        height: auto !important;
+    }
+
+    .navbar .nav-item{
+        width: 100%;
+    }
+
+    .dropdown .dropdown-menu{
+        width: 100%;
+    }
+}
+
+/* Styles pour les écrans de moins de 480px */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 14px;
+    }
 }

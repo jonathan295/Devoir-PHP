@@ -71,5 +71,4 @@ else{ ?>
 ?>
 <a class="btn btn-dark" href="afficher_stage.php">Revenir à la page précédente !</a>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

@@ -51,7 +51,7 @@ $donnee=mysqli_query($conn, "select numdev,date_dev,nommat,nom,coeficient,numsem
 <?php
 while($a=mysqli_fetch_array($donnee)){
 if(isset($_SESSION['admin'])){ 
-echo '<td><a href="modif_devoir.php?modif_dev='.$a['numdev'].'">modifier</a></td><td><a href="modif_devoir.php?supp_dev='.$a['numdev'].'" onclick="return(confirm(\'Etes-vous s�r de vouloir supprimer cette entr�e?\ntous les enregistrements en relation avec cette entr�e seront perdus\'));">Supprimer</td>';} echo '<td>'.$a['nommat'].'</td><td>'.$a['date_dev'].'</td><td>'.$a['nom'].'</td><td>'.$a['coeficient'].'</td><td>S'.$a['numsem'].'</td><td>'.$a['n_devoir'].'</td></tr>';
+echo '<td><a href="modif_devoir.php?modif_dev='.$a['numdev'].'"><img style="width: 20px;" src="/gestion00/image/editer.png" alt="modifier"></a></td><td><a href="modif_devoir.php?supp_dev='.$a['numdev'].'" onclick="return(confirm(\'Etes-vous s�r de vouloir supprimer cette entr�e?\ntous les enregistrements en relation avec cette entr�e seront perdus\'));"><img style="width: 20px;" src="/gestion00/image/supprimer.png" alt="supprimer"></td>';} echo '<td>'.$a['nommat'].'</td><td>'.$a['date_dev'].'</td><td>'.$a['nom'].'</td><td>'.$a['coeficient'].'</td><td>S'.$a['numsem'].'</td><td>'.$a['n_devoir'].'</td></tr>';
 }
 ?>
 </tbody>
@@ -89,5 +89,4 @@ $retour=mysqli_query($conn, "select distinct nom from classe"); // afficher les 
 </form>
 <?php } ?>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

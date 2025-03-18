@@ -27,7 +27,7 @@ if(isset($_POST['nomcl']) and isset($_POST['radiosem'])){
 	<?php
 		while($a=mysqli_fetch_array($donnee)){
 			if(isset($_SESSION['admin'])){
-				echo '<td><a href="modif_enseign.php?modif_ensein='.$a['id'].'" >modifier</a></td><td><a href="modif_enseign.php?supp_ensein='.$a['id'].'" onclick="return(confirm(\'Etes-vous s�r de vouloir supprimer cette entr�e?\ntous les enregistrements en relation avec cette entr�e seront perdus\'));">Supprimer</td>';} echo '<td>'.$a['nomcl'].'</td><td>'.$a['promotion'].'</td><td>'.$a['nommat'].'</td><td>'.$a['nom'].'</td><td>S'.$a['numsem'].'</td></tr>';
+				echo '<td><a href="modif_enseign.php?modif_ensein='.$a['id'].'" ><img style="width: 20px;" src="/gestion00/image/editer.png" alt="modifier"></a></td><td><a href="modif_enseign.php?supp_ensein='.$a['id'].'" onclick="return(confirm(\'Etes-vous s�r de vouloir supprimer cette entrée?\ntous les enregistrements en relation avec cette entrée seront perdus\'));"><img style="width: 20px;" src="/gestion00/image/supprimer.png" alt="supprimer"></td>';} echo '<td>'.$a['nomcl'].'</td><td>'.$a['promotion'].'</td><td>'.$a['nommat'].'</td><td>'.$a['nom'].'</td><td>S'.$a['numsem'].'</td></tr>';
 			}
 	?>
 	<tbody>
@@ -67,5 +67,4 @@ $retour=mysqli_query($conn, "select distinct nom from classe");
 </form>
 <?php } ?>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

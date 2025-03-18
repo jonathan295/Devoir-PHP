@@ -84,7 +84,7 @@ mysqli_query($conn, "insert into evaluation(numdev,numel,note) values('$numdev',
 <SCRIPT LANGUAGE="Javascript">
 alert("Ajout avec succès!");
 </SCRIPT>
-<br/><br/><a href="ajout_eval.php">Revenir à la page principale </a>
+<br/><br/><a class="btn btn-dark" href="ajout_eval.php">Revenir à la page principale </a>
 <?php
 }
 }
@@ -97,30 +97,34 @@ $numdev=$_GET['ajout_eval'];
 $donnee=mysqli_fetch_array(mysqli_query($conn, "select date_dev,coeficient,n_devoir from devoir where numdev='$numdev'"));//  pour afficher les information du devoir k'il a choisis pour ajouter un devoir
 $data=mysqli_query($conn, "select numel,nomel,prenomel from eleve where codecl=(select codecl from classe where nom='$nomcl' and promotion='$promo')");//pour afficher les etudiants
 ?>
-<form method="POST" action="ajout_eval.php" class="formulaire">
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-      <label for="">Filière</label>
-      <input type="text" value="<?php echo $nomcl.' - '.$promo; ?>">
-   </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-      <label for="">Matière</label>
-      <input type="text" value="<?php echo $nommat; ?>">
+<form method="POST" action="ajout_eval.php" class="form">
+   <div class="row justify-content-center">
+      <div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+         <label for="">Filière</label>
+         <input type="text" value="<?php echo $nomcl.' - '.$promo; ?>">
+      </div>
+      <div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+         <label for="">Matière</label>
+         <input type="text" value="<?php echo $nommat; ?>">
+      </div>
    </div>
    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
       <label for="">Semestre</label>
-      <input type="text" value="<?php echo $semestre; ?>">
+      <input class="col-2" type="text" value="<?php echo $semestre; ?>">
    </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-      <label for="">Date devoir</label>
-      <input type="text" value="<?php echo $donnee['date_dev']; ?>">
-   </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-      <label for="">Coefficient</label>
-      <input type="text" value="<?php echo $donnee['coeficient']; ?>">
+   <div class="row justify-content-center">
+      <div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+         <label for="">Date devoir</label>
+         <input type="text" value="<?php echo $donnee['date_dev']; ?>">
+      </div>
+      <div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+         <label for="">Coefficient</label>
+         <input type="text" value="<?php echo $donnee['coeficient']; ?>">
+      </div>
    </div>
    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
       <label for="">Devoir N°</label>
-      <input type="text" value="<?php echo $donnee['n_devoir']; ?>">
+      <input class="col-4" type="text" value="<?php echo $donnee['n_devoir']; ?>">
    </div>
    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
       <label for="">Etudiant</label>
@@ -131,11 +135,11 @@ $data=mysqli_query($conn, "select numel,nomel,prenomel from eleve where codecl=(
    </div>
    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
       <label for="">Note</label>
-      <input type="text" name="note">
+      <input class="col-4" type="text" name="note">
    </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+   <!-- <div class="row justify-content-center m-4 flex-column align-items-center text-center"> -->
       <input type="hidden" name="numdev" value="<?php echo $numdev; ?>">
-   </div>
+   <!-- </div> -->
    <div class="row justify-content-center m-4 text-center">
       <input class="btn btn-dark col-2" type="submit" value="Ajouter">
    </div>
@@ -173,5 +177,4 @@ $data=mysqli_query($conn, "select distinct promotion from classe order by promot
 </form>
 <?php } ?>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

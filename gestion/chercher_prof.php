@@ -75,7 +75,7 @@ else if(isset($_POST['nomel'])){
  <tbody>
  <?php
 	while($a=mysqli_fetch_array($cherche)){
-		echo '<tr><td>'.$a['nomp'].'</td><td>'.$a['prenomp'].'</td><td >'.$a['adresse'].'</td><td >'.$a['telephone'].'</td><td>'.$a['nom'].'</td><td>'.$a['nommat'].'</td><td>'.$a['promotion'].'</td></tr><tr></tr>';
+		echo '<tr><td>'.$a['nomp'].'</td><td>'.$a['prenomp'].'</td><td >'.$a['adresse'].'</td><td >'.$a['telephone'].'</td><td>'.$a['nom'].'</td><td>'.$a['nommat'].'</td><td>'.$a['promotion'].'</td></tr>';
 	}
 	?>
 	</tbody>
@@ -86,5 +86,4 @@ else if(isset($_POST['nomel'])){
 ?>
 <?php endif; ?>
 </div>
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?> 

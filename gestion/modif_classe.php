@@ -70,3 +70,4 @@ echo '<a class="btn btn-dark" href="affiche_classe.php">Revenir à la page  prec
 }
 ?>
 </div>
+<?php include ("../pages/footer.php"); ?>

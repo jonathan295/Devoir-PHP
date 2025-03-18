@@ -41,7 +41,7 @@ $data=mysqli_query($conn,"select numprof,nom from prof");//select pour les promo
         echo '<option value="'.$a['numprof'].'">'.$a['nom'].'</option>';
         }?></select>
     </div>
-    <div class="row justify-content-center m-4 flex-column align-items-center text-center">
+    <div class="row justify-content-center m-4 text-center">
         <input class="btn btn-dark col-2" type="submit" value="Ajouter">
     </div>
 </form>
@@ -52,7 +52,5 @@ $data=mysqli_query($conn,"select numprof,nom from prof");//select pour les promo
 }
 ?>
 </div>
-</pre>
-</center>
 </div>
-</html>
+<?php include ("../pages/footer.php"); ?>

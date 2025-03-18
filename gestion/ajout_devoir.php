@@ -122,5 +122,4 @@ $bool=true;
 	</div>
 </form>
 <?php } ?>
-</div>
-</html>
+<?php include ("../pages/footer.php"); ?>

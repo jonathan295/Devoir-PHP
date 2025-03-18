@@ -11,23 +11,25 @@ $nomcl=$_GET['nomcl'];
 $data=mysqli_query($conn, "select promotion from classe where nom='$nomcl' order by promotion desc");
 ?>
 <form method="post" action="afficher_matiere.php" class="form container">
-   <div class="row justify-content-center m-4 flex-column align-items-center">
+   <div class="row justify-content-center m-4">
       <h3 class="text-center">Veuillez choisir la promotion et le semestre pour <?php echo $nomcl; ?></h3>
    </div>
    <h3 class="text-center">Critères d'affichage</h3>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-      <label class="col-4" for="">Promotion:</label>
-      <select class="col-4" name="promotion"> 
-      <?php while($a=mysqli_fetch_array($data)){
-      echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
-      }?></select>
+   <div class="row justify-content-around">
+      <div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+         <label class="col-4" for="">Promotion:</label>
+         <select class="col-4" name="promotion"> 
+         <?php while($a=mysqli_fetch_array($data)){
+         echo '<option value="'.$a['promotion'].'">'.$a['promotion'].'</option>';
+         }?></select>
+      </div>
+      <div class="col-5 justify-content-center m-4 flex-column align-items-center text-center">
+         <label class="col-4" for="">Semestre:</label>
+         <select class="col-4" name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
+         </select>
+      </div>
    </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center text-center">
-      <label class="col-4" for="">Semestre:</label>
-      <select class="col-4" name="radiosem"><?php for($i=1;$i<=4;$i++){ echo '<option value="'.$i.'">Semestre'.$i.'</option>'; } ?>
-      </select>
-   </div>
-   <div class="row justify-content-center m-4 flex-column align-items-center">
+   <div class="row justify-content-center m-4">
       <input class="btn btn-dark col-3" type="submit" value="Afficher les matieres">
    </div>
 </form>
@@ -56,7 +58,7 @@ $donnee=mysqli_query($conn, "select matiere.codemat,nommat,classe.nom,numsem,pro
    <p>
    <?php
    while($a=mysqli_fetch_array($donnee)){
-  if(isset($_SESSION['admin'])){ echo '<tr><td><a href="modif_matiere.php?modif_matiere='.$a['codemat'].'">modifier</a></td><td><a href="modif_matiere.php?supp_matiere='.$a['codemat'].'" onclick="return(confirm(\'Etes-vous s�r de vouloir supprimer cette entr�e?\'));">supprimer</a></td>'; } echo '<td>'.$a['nommat'].'</td><td >'.$a['nom'].'</strong></td><td>'.$a['nomprof'].'</td><td>S'.$a['numsem'].'</td></tr>';
+  if(isset($_SESSION['admin'])){ echo '<tr><td><a href="modif_matiere.php?modif_matiere='.$a['codemat'].'"><img src="/gestion00/image/editer.png" class="img-fluid" style="width: 20px;" alt="modifier"></a></td><td><a href="modif_matiere.php?supp_matiere='.$a['codemat'].'" onclick="return(confirm(\'Etes-vous s�r de vouloir supprimer cette entr�e?\'));"><img src="/gestion00/image/supprimer.png" class="img-fluid" style="width: 20px;" alt="supprimer"></a></td>'; } echo '<td>'.$a['nommat'].'</td><td >'.$a['nom'].'</strong></td><td>'.$a['nomprof'].'</td><td>S'.$a['numsem'].'</td></tr>';
    }
    ?>
    </p>
@@ -67,7 +69,4 @@ $donnee=mysqli_query($conn, "select matiere.codemat,nommat,classe.nom,numsem,pro
 echo '<br/><br/><a class="btn btn-dark" href="afficher_matiere.php?nomcl='.$nomcl.'">Revenir à la page principale</a>';
 } ?>
 </div>
-</pre>
-
-</body>
-</html>
+<?php include ("../pages/footer.php"); ?>

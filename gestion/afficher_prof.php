@@ -26,9 +26,9 @@ $data=mysqli_query($conn, "select * from prof");
 <?php
 while($a=mysqli_fetch_array($data)){
 ?>
-<tr><?php if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])){
-echo '<tr><td><a href="modif_prof.php?modif_prof='.$a['numprof'].'">modifier</a></td><td><a href="modif_prof.php?supp_prof='.$a['numprof'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\'));">supprimer</a></td>';}
-echo '<td>'.$a['nom'].'</td><td>'.$a['prenom'].'</td><td>'.$a['adresse'].'</td><td>'.$a['telephone'].'</td><td class="text-center" ><a href="option_prof.php?matiere='.$a['numprof'].'">Voir</a><td class="text-center" ><a href="option_prof.php?classe='.$a['numprof'].'">Voir</a></tr><tr></tr>';
+<?php if(isset($_SESSION['admin']) or isset($_SESSION['etudiant']) or isset($_SESSION['prof'])){
+echo '<tr><td><a href="modif_prof.php?modif_prof='.$a['numprof'].' d-flex justify-content-center"><img src="/gestion00/image/editer.png" class="img-fluid" style="width: 20px;" alt="voir enseignant"></a></td><td><a href="modif_prof.php?supp_prof='.$a['numprof'].'" onclick="return(confirm(\'Etes-vous sûr de vouloir supprimer cette entrée?\')); d-flex justify-content-center"><img src="/gestion00/image/supprimer.png" class="img-fluid" style="width: 20px;" alt="voir enseignant"></a></a></td>';}
+echo '<td>'.$a['nom'].'</td><td>'.$a['prenom'].'</td><td>'.$a['adresse'].'</td><td>'.$a['telephone'].'</td><td class="text-center" ><a href="option_prof.php?matiere='.$a['numprof'].' class="d-flex justify-content-center"><img src="/gestion00/image/oeil.png" class="img-fluid" style="width: 20px;" alt="voir enseignant"></a><td class="text-center" ><a href="option_prof.php?classe='.$a['numprof'].' class="d-flex justify-content-center"><img src="/gestion00/image/oeil.png" class="img-fluid" style="width: 20px;" alt="voir enseignant"></a></tr>';
 }
 ?>
 <tbody>
@@ -36,6 +36,4 @@ echo '<td>'.$a['nom'].'</td><td>'.$a['prenom'].'</td><td>'.$a['adresse'].'</td><
 <?php
 echo '<a class="btn btn-dark" href="index.php">Revenir à la page précédente !</a>';
 ?>
-</pre>
-</>
-</html>
+<?php include ("../pages/footer.php"); ?>

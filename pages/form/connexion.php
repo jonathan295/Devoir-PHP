@@ -12,12 +12,12 @@
                     <option value="etudiant">Etudiant</option>
                     <option value="prof">Professeur</option>
                     <option value="admin">Admin</option>
-                    <?php if (!empty($_SESSION["type_err_conn"])): ?>
-                        <div id="" class="invalid-feedback">
-                            <p><?php echo $_SESSION["type_err_conn"]; ?></p>
-                        </div>
-                    <?php endif; ?>
                 </select>
+                <?php if (!empty($_SESSION["type_err_conn"])): ?>
+                    <div id="" class="invalid-feedback">
+                        <p><?php echo $_SESSION["type_err_conn"]; ?></p>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="form-group m-4">
                 <label for="pseudo"><span class="font-weight-bold">Pseudo :</span></label>
@@ -37,7 +37,7 @@
                 </div>
             <?php endif; ?>
             </div>
-            <input type="submit" value="envoyer" name="connexion" class="btn-lg"><br/>
+            <input class="btn btn-dark col-4" type="submit" value="envoyer" name="connexion" class="btn-lg"><br/>
         </form>
     </div>
 

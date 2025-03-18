@@ -84,5 +84,5 @@ mysqli_query($conn, "delete from evaluation where numeval='$id'");
 echo '<a class="btn btn-dark" href="afficher_evaluation.php">Revenir à la page d\'affichage</a>'; //on revient � la page princippale car on n'a plus l'id dont on affiche la matiere dans la modification
 }
 ?>
-</pre>
 </div>
+<?php include ("../pages/footer.php"); ?>
